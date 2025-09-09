@@ -1,0 +1,24 @@
+# CMake
+/build/
+/cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+*.cmake
+install_manifest.txt
+compile_commands.json
+
+# Binaries
+*.o
+*.a
+*.so
+*.dll
+*.dylib
+*.exe
+
+# IDE
+.vscode/
+.idea/
+*.user
+
+# Misc
+.DS_Store
