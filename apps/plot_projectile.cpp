@@ -9,7 +9,8 @@ using ray_tracer::math::Tuple;
 
 int main() {
     Tuple pos = Tuple(0.0, 0.0, 0.0, 1.0);
-    Tuple vel = Tuple(15, 8, 0.0, 0.0);
+    Tuple vel = Tuple(5, 8, 0.0, 0.0);
+    Tuple vel_norm = norm(vel) * 5;
     Projectile p = Projectile(pos, vel);
 
     Tuple grav = Tuple(0.0, -0.1, 0.0, 0.0);
