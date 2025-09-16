@@ -1,7 +1,9 @@
-#include <cassert>
-#include <ray_tracer/img/color.h>
-#include "test_helpers.h"
 #include <gtest/gtest.h>
+#include <ray_tracer/img/color.h>
+
+#include <cassert>
+
+#include "test_helpers.h"
 
 using ray_tracer::img::Color;
 
@@ -40,7 +42,7 @@ TEST(Color, multiply_color) {
 
 TEST(Color, divide_by_scalar) {
     const Color a{4.0, 5.0, 6.0};
-    const Color b = a/2.0;
+    const Color b = a / 2.0;
     expect_rgb(b, 2.0, 2.5, 3.0);
 }
 

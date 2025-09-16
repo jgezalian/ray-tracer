@@ -1,9 +1,10 @@
 #include <ray_tracer/img/canvas.h>
+
 #include <algorithm>
 #include <cmath>
 #include <fstream>
-#include <string>
 #include <iostream>
+#include <string>
 
 namespace ray_tracer::img {
 

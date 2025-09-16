@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 project(ray_tracer)
 set(CMAKE_CXX_STANDARD 20)
-add_library(ray_tracer src/img/canvas.cpp)
+add_library(ray_tracer src/img/canvas.cpp src/math/matrix.cpp)
 target_include_directories(ray_tracer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 add_executable(plot_projectile apps/plot_projectile.cpp)
 target_link_libraries(plot_projectile PRIVATE ray_tracer)
@@ -19,7 +19,8 @@ enable_testing()
 add_executable(unit_tests 
     tests/canvas_tests.cpp
     tests/color_tests.cpp
-    tests/geo_tests.cpp)
+    tests/geo_tests.cpp
+    tests/matrix_tests.cpp)
 target_include_directories(unit_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 target_link_libraries(unit_tests PRIVATE ray_tracer GTest::gtest_main)
 include(GoogleTest)         # helper macros

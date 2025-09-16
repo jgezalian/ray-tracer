@@ -14,8 +14,7 @@ struct Environment {
     Tuple grav;
     Tuple wind;
 
-    Environment(const Tuple& grav, const Tuple& wind)
-        : grav(grav), wind(wind) {}
+    Environment(const Tuple& grav, const Tuple& wind) : grav(grav), wind(wind) {}
 };
 
 inline Projectile launch(const Projectile& p, const Environment& e) {
