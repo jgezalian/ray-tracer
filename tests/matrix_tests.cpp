@@ -41,7 +41,41 @@ TEST(Matrix, transpose_rectangular) {
     expect_matrix(t, {1, 4, 2, 5, 3, 6});
 }
 
+TEST(Matrix, determinant) {
+    const Matrix m(2, 2, {5, 0, -1, 5});
+    EXPECT_NEAR(determinant(m), 25, 1e-12);
+    const Matrix m1(4, 4, {-2, -8, 3, 5, -3, 1, 7, 3, 1, 2, -9, 6, -6, 7, 7, -9});
+    EXPECT_NEAR(determinant(m1), -4071, 1e-12);
+    const Matrix m2(4, 4, {-5, 2, 6, -8, 1, -5, 1, 8, 7, 7, -6, -7, 1, -3, 7, 4});
+    EXPECT_NEAR(determinant(m2), 532, 1e-12);
+}
+
 TEST(Matrix, submatrix) {
     const Matrix m(4, 4, {-6, 1, 1, 6, -8, 5, 8, 6, -1, 0, 8, 2, -7, 1, -1, 1});
     expect_matrix(m.submatrix(2, 1), {-6, 1, 6, -8, 8, 6, -7, -1, 1});
+}
+
+TEST(Matrix, minor) {
+    const Matrix m(3, 3, {3, 5, 0, 2, -1, -7, 6, -1, 5});
+    double min = minor(m, 1, 0);
+    EXPECT_NEAR(min, 25, 1e-12);
+}
+
+TEST(Matrix, cofactor) {
+    const Matrix m(3, 3, {3, 5, 0, 2, -1, -7, 6, -1, 5});
+    double cofactor1 = cofactor(m, 0, 0);
+    double cofactor2 = cofactor(m, 1, 0);
+    EXPECT_NEAR(cofactor1, -12, 1e-12);
+    EXPECT_NEAR(cofactor2, -25, 1e-12);
+}
+
+TEST(Matrix, inverse) {
+    std::vector<double> vals{1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0,
+                             0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0};
+    const Matrix m(4, 4, {-5, 2, 6, -8, 1, -5, 1, 8, 7, 7, -6, -7, 1, -3, 7, 4});
+    const Matrix m_inv = inverse(m);
+    expect_matrix(m * m_inv, vals);
+    const Matrix m2(4, 4, {8, -5, 9, 2, 7, 5, 6, 1, -6, 0, 9, 6, -3, 0, -9, -4});
+    const Matrix m2_inv = inverse(m2);
+    expect_matrix(m2 * m2_inv, vals);
 }

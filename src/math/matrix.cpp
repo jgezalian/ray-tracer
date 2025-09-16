@@ -64,10 +64,6 @@ Matrix operator*(const Matrix& a, const Matrix& b) {
     return prod;
 }
 
-double determinant2x2(const Matrix &m) {
-    assert(m.rows == 2 && m.cols == 2);
-    return (m(0,0) * m(1, 1) - m(0, 1) * m(1, 0));
-}
 
 Matrix Matrix::submatrix(int r, int c) const {
     Matrix sub(rows - 1, cols - 1);
@@ -84,6 +80,40 @@ Matrix Matrix::submatrix(int r, int c) const {
         ++k;
     }
     return sub;
+}
+
+double minor(const Matrix &m, int r, int c) {
+    return determinant(m.submatrix(r, c));
+}
+
+double cofactor(const Matrix &m, int r, int c) {
+    double min = minor(m, r, c);
+    if ((r + c) % 2 != 0) return -min;
+    return min;
+}
+
+double determinant(const Matrix &m) {
+    assert(m.cols == m.rows && "Matrix is not square");
+    if(m.cols == 2) return (m(0,0) * m(1, 1)) - (m(0, 1) * m(1, 0));
+    int det = 0;
+    for(int i = 0; i < m.cols; ++i){
+        det += m(0, i) * cofactor(m, 0, i);
+    }
+    return det;
+}
+
+Matrix inverse(const Matrix &m) {
+    double det = determinant(m);
+    assert(det != 0 && "Matrix is not invertible");
+    Matrix m_inv(m.rows, m.cols);
+    for(int i = 0; i < m.rows; ++i){
+        for(int j = 0; j < m.cols; ++j){
+            double cof = cofactor(m, i, j);
+            m_inv(j, i, cof/det);
+        }
+    }
+
+    return m_inv;
 }
 
 }  // namespace ray_tracer::math

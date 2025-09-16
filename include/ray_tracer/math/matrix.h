@@ -23,8 +23,10 @@ struct Matrix {
 
 bool operator==(const Matrix &a, const Matrix &b);
 Matrix operator*(const Matrix &a, const Matrix &b);
-double determinant2x2(const Matrix &m);
-
+double minor(const Matrix &m, int r, int c);
+double cofactor(const Matrix &m, int r, int c);
+double determinant(const Matrix &m);
+Matrix inverse(const Matrix &m);
 
 };  // namespace ray_tracer::math
 
