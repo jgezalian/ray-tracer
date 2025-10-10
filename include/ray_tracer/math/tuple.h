@@ -1,6 +1,5 @@
 #pragma once
 #include <ray_tracer/math/util.h>
-
 #include <cassert>
 #include <cmath>
 #include <iostream>
@@ -78,4 +77,6 @@ inline Tuple cross(const Tuple& t, const Tuple& v) {
     assert(t.isVector() && v.isVector() && "can only cross two vectors");
     return Tuple(t.y * v.z - t.z * v.y, t.z * v.x - t.x * v.z, t.x * v.y - t.y * v.x, 0);
 }
+
 }  // namespace ray_tracer::math
+   // namespace ray_tracer::math

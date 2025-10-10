@@ -9,7 +9,7 @@
 namespace ray_tracer::img {
 
 // initalize canvas of width x height with all black pixels
-Canvas::Canvas(int width, int height)
+Canvas::Canvas(std::size_t width, std::size_t height)
     : width(width),
       height(height),
       pixels(height, std::vector<Color>(width, Color(0.0, 0.0, 0.0))) {}
@@ -27,13 +27,13 @@ void write_ppm(const std::string& ppm_text) {
 
 std::string canvas_to_ppm(const Canvas& canvas) {
     int MAX_CHAR_LINE = 70;
-    int line_width = 0;
+    std::size_t line_width = 0;
     std::string ppm_text{std::string("P3\n") + std::to_string(canvas.width) + std::string(" ") +
                          std::to_string(canvas.height) + std::string("\n255\n")};
 
     auto ppm_append = [&](int rgb_val) {
         std::string next_token = std::to_string(limit255(rgb_val));
-        int next_len =
+        std::size_t next_len =
             (line_width == 0 ? 0 : 1) + next_token.length(); /* +1 to count leading space when
                                                                 writing past first val*/
         if (line_width + next_len > MAX_CHAR_LINE) {

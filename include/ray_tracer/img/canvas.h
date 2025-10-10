@@ -8,12 +8,12 @@
 namespace ray_tracer::img {
 
 struct Canvas {
-    int width;
-    int height;
+    std::size_t width;
+    std::size_t height;
     std::vector<std::vector<Color>> pixels;
 
     // initalize canvas of width x height with all black pixels
-    Canvas(int width, int height);
+    Canvas(std::size_t width, std::size_t height);
 
     void write_pixel(int x, int y, const Color &c);
 };

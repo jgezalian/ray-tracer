@@ -10,13 +10,13 @@ using namespace std::string_literals;
 
 TEST(Canvas, init_black) {
     Canvas canvas{100, 100};
-    int h = canvas.height;
-    int w = canvas.width;
+    std::size_t h = canvas.height;
+    std::size_t w = canvas.width;
     EXPECT_EQ(h, 100);
     EXPECT_EQ(w, 100);
 
-    for (int i = 0; i < h; ++i) {
-        for (int j = 0; j < w; ++j) {
+    for (std::size_t i = 0; i < h; ++i) {
+        for (std::size_t j = 0; j < w; ++j) {
             expect_rgb(canvas.pixels[i][j], 0.0, 0.0, 0.0);
         }
     }
