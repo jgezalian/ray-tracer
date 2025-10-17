@@ -6,6 +6,10 @@ namespace ray_tracer::math {
 Matrix translation(double x, double y, double z);
 Matrix scaling(double x, double y, double z);
 Matrix rotate_x(double r);
+Matrix rotate_y(double r);
+Matrix rotate_z(double r);
 Matrix tuple_to_mat(const Tuple &t);
+Matrix shearing(double x_y, double x_z, double y_x, double y_z, double z_x, double z_y);
+Matrix chain_transform(std::vector<Matrix> trans_matrices);
 
 }

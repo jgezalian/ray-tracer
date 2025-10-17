@@ -29,7 +29,7 @@ int main() {
     }
 
     std::string ppm_string = canvas_to_ppm(canvas);
-    ray_tracer::img::write_ppm(ppm_string);
+    ray_tracer::img::write_ppm(ppm_string, "projectile");
 
     return 0;
 }

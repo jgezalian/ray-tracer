@@ -1,8 +1,6 @@
 #include <gtest/gtest.h>
-#include <ray_tracer/img/canvas.h>
-#include <ray_tracer/img/color.h>
-
 #include "test_helpers.h"
+#include <iostream>
 
 using ray_tracer::img::Canvas;
 using ray_tracer::img::Color;

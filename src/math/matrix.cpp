@@ -15,7 +15,7 @@ Matrix::Matrix(std::size_t r, std::size_t c, std::initializer_list<double> value
 
 Matrix::Matrix(std::size_t r, std::size_t c) : rows(r), cols(c), data((r * c), 0.0) {}
 
-Matrix Matrix::identity(int n) {
+Matrix Matrix::identity(std::size_t n) {
     Matrix I(n, n);
     for (std::size_t i = 0; i < n; ++i) {
         I(i, i, 1.0);

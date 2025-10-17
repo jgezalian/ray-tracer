@@ -22,6 +22,6 @@ inline constexpr int limit255(int rgb_val) noexcept {
     return rgb_val < 0 ? 0 : (rgb_val > 255 ? 255 : rgb_val);
 }
 
-void write_ppm(const std::string &ppm_text);
+void write_ppm(const std::string &ppm_text, std::string name);
 std::string canvas_to_ppm(const Canvas &canvas);
 }  // namespace ray_tracer::img

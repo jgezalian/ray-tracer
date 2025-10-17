@@ -1,12 +1,22 @@
 #include <gtest/gtest.h>
 #include "test_helpers.h"
 #include <iostream>
+#include <cstdarg>
 
-using namespace ray_tracer::math;
-constexpr double pi = 3.14159265358979323846;
-
-int main() {
-const Matrix half_quarter = rotate_x(pi/4);
-double det = determinant(half_quarter);
-
+ 
+int add_nums(int count...)
+{
+    int result = 0;
+    std::va_list args;
+    std::cout << count << '\n';
+    va_start(args, count);
+    for (int i = 0; i < count; ++i)
+        result += va_arg(args, int);
+    va_end(args);
+    return result;
+}
+ 
+int main()
+{
+    std::cout << add_nums(4, 25, 25, 50, 50) << '\n';
 }

@@ -16,7 +16,7 @@ struct Matrix {
     Matrix(std::size_t r, std::size_t c, std::initializer_list<double> values);
     Matrix(std::size_t r, std::size_t c);
     
-    static Matrix identity(int n);
+    static Matrix identity(std::size_t n);
     const double& operator()(std::size_t r, std::size_t c) const { return data[(r * cols + c)]; }
     void operator()(std::size_t r, std::size_t c, double val) { data[(r * cols + c)] = val; }
     Matrix transpose() const;

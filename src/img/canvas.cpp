@@ -15,24 +15,25 @@ Canvas::Canvas(std::size_t width, std::size_t height)
       pixels(height, std::vector<Color>(width, Color(0.0, 0.0, 0.0))) {}
 
 void Canvas::write_pixel(int x, int y, const Color& c) {
-    if (x < 0 || y < 0 || y >= height || x >= width) return;
-    pixels[y][x] = c;
+    if (x < 0 || y < 0 || y >= static_cast<int>(height) || x >= static_cast<int>(width)) return;
+    pixels[static_cast<std::size_t>(y)][static_cast<std::size_t>(x)] = c;
 }
 
-void write_ppm(const std::string& ppm_text) {
-    std::ofstream outfile("generated_images/projectile.ppm");
+void write_ppm(const std::string& ppm_text, std::string name) {
+    std::ofstream outfile("generated_images/" + name + ".ppm");
     outfile << ppm_text << '\n';
     outfile.close();
 }
 
 std::string canvas_to_ppm(const Canvas& canvas) {
-    int MAX_CHAR_LINE = 70;
+    constexpr std::size_t MAX_CHAR_LINE = 70;
     std::size_t line_width = 0;
     std::string ppm_text{std::string("P3\n") + std::to_string(canvas.width) + std::string(" ") +
                          std::to_string(canvas.height) + std::string("\n255\n")};
 
     auto ppm_append = [&](int rgb_val) {
         std::string next_token = std::to_string(limit255(rgb_val));
+        //std::cout << next_token << '\n';
         std::size_t next_len =
             (line_width == 0 ? 0 : 1) + next_token.length(); /* +1 to count leading space when
                                                                 writing past first val*/

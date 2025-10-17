@@ -1,13 +1,3 @@
-#include <ray_tracer/demo/cannon.h>
-#include <ray_tracer/img/canvas.h>
-#include <ray_tracer/img/color.h>
-#include <ray_tracer/math/tuple.h>
-#include <stdio.h>
-
-#include <cassert>
-#include <cmath>
-#include <iostream>
-
 #include "test_helpers.h"
 
 using namespace ray_tracer::math;

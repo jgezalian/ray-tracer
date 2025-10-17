@@ -1,8 +1,4 @@
 #include <gtest/gtest.h>
-#include <ray_tracer/img/color.h>
-
-#include <cassert>
-
 #include "test_helpers.h"
 
 using ray_tracer::img::Color;

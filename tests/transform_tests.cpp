@@ -90,3 +90,80 @@ TEST(Transform, rotate_inv_x) {
     expect_tuple(inv_half_quarter * p, 0, std::sqrt(2)/2, -1 * std::sqrt(2)/2, 1);
 }
 
+TEST(Transform, rotate_y) {
+    const Tuple p = point(0, 0, 1);
+    const Matrix half_quarter = rotate_y(pi/4);
+    const Matrix full_quarter = rotate_y(pi/2);
+    expect_tuple(half_quarter * p, std::sqrt(2)/2, 0, std::sqrt(2)/2, 1);
+    expect_tuple(full_quarter * p, 1, 0, 0, 1);
+}
+
+TEST(Transform, rotate_z) {
+    const Tuple p = point(0, 1, 0);
+    const Matrix half_quarter = rotate_z(pi/4);
+    const Matrix full_quarter = rotate_z(pi/2);
+    expect_tuple(half_quarter * p, -1 * std::sqrt(2)/2, std::sqrt(2)/2, 0, 1);
+    expect_tuple(full_quarter * p, -1, 0, 0, 1);
+}
+
+TEST(Transform, shearing_xy) {
+    const Matrix shear = shearing(1, 0, 0, 0, 0, 0);
+    const Tuple p = point(2, 3, 4);
+    expect_tuple(shear * p, 5, 3, 4, 1);
+}
+
+TEST(Transform, shearing_xz) {
+    const Matrix shear = shearing(0, 1, 0, 0, 0, 0);
+    const Tuple p = point(2, 3, 4);
+    expect_tuple(shear * p, 6, 3, 4, 1);
+}
+
+TEST(Transform, shearing_yx) {
+    const Matrix shear = shearing(0, 0, 1, 0, 0, 0);
+    const Tuple p = point(2, 3, 4);
+    expect_tuple(shear * p, 2, 5, 4, 1);
+}
+
+TEST(Transform, shearing_yz) {
+    const Matrix shear = shearing(0, 0, 0, 1, 0, 0);
+    const Tuple p = point(2, 3, 4);
+    expect_tuple(shear * p, 2, 7, 4, 1);
+}
+
+TEST(Transform, shearing_zx) {
+    const Matrix shear = shearing(0, 0, 0, 0, 1, 0);
+    const Tuple p = point(2, 3, 4);
+    expect_tuple(shear * p, 2, 3, 6, 1);
+}
+
+TEST(Transform, shearing_zy) {
+    const Matrix shear = shearing(0, 0, 0, 0, 0, 1);
+    const Tuple p = point(2, 3, 4);
+    expect_tuple(shear * p, 2, 3, 7, 1);
+}
+
+TEST(Transform, sequence) {
+    const Tuple p = point(1, 0, 1);
+    const Matrix a = rotate_x(pi/2);
+    const Matrix b = scaling(5, 5, 5);
+    const Matrix c = translation(10, 5, 7);
+
+    const Tuple p2 = a * p;
+    expect_tuple(p2, 1, -1, 0, 1);
+
+    const Tuple p3 = b * p2;
+    expect_tuple(p3, 5, -5, 0, 1);
+
+    const Tuple p4 = c * p3;
+    expect_tuple(p4, 15, 0, 7, 1);
+}
+
+TEST(Transform, chain) {
+    const Tuple p = point(1, 0, 1);
+    const Matrix a = rotate_x(pi/2);
+    const Matrix b = scaling(5, 5, 5);
+    const Matrix c = translation(10, 5, 7);
+    const Matrix chain = chain_transform({a, b, c});
+    expect_tuple(chain * p, 15, 0, 7, 1);
+}
+

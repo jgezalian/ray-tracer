@@ -54,7 +54,6 @@ TEST(Matrix, submatrix) {
     const Matrix m(4, 4, {-6, 1, 1, 6, -8, 5, 8, 6, -1, 0, 8, 2, -7, 1, -1, 1});
     expect_matrix(m.submatrix(2, 1), {-6, 1, 6, -8, 8, 6, -7, -1, 1});
     const Matrix m1(4, 4, {1, 0, 0, 0, 0, 0.707107, -0.707107, 0, 0, 0.707107, 0.707107, 0, 0, 0, 0, 1});
-    print_matrix(m.submatrix(0,0));
 }
 
 TEST(Matrix, minor) {
