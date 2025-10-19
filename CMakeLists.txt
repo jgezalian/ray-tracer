@@ -10,6 +10,7 @@ add_library(ray_tracer
   src/math/transform.cpp 
   src/geometry/intersection.cpp
   src/geometry/sphere.cpp
+  src/math/ray.cpp
 )
 target_include_directories(ray_tracer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 add_executable(plot_projectile apps/plot_projectile.cpp)
@@ -34,6 +35,7 @@ add_executable(unit_tests
     tests/transform_tests.cpp
     tests/ray_tests.cpp
     tests/intersection_tests.cpp
+    tests/sphere_tests.cpp
     )
 target_include_directories(unit_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 target_link_libraries(unit_tests PRIVATE ray_tracer GTest::gtest_main)

@@ -9,7 +9,7 @@
 #include <ray_tracer/math/transform.h>
 #include <ray_tracer/math/tuple.h>
 #include <ray_tracer/geometry/intersection.h>
-
+#include <ray_tracer/geometry/sphere.h>
 #include <vector>
 
 using ray_tracer::img::Color;

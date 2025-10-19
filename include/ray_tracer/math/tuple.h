@@ -53,7 +53,7 @@ inline Tuple operator/(const Tuple& t, double scalar) {
 }
 
 inline bool operator==(const Tuple& t1, const Tuple& t2) {
-    return (dbl_eql(t1.x, t2.x) && dbl_eql(t1.y, t2.x) && dbl_eql(t1.z, t2.z) &&
+    return (dbl_eql(t1.x, t2.x) && dbl_eql(t1.y, t2.y) && dbl_eql(t1.z, t2.z) &&
             dbl_eql(t1.w, t2.w));
 }
 

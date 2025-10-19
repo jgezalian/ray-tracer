@@ -2,6 +2,8 @@
 #include <ray_tracer/math/tuple.h>
 
 namespace ray_tracer::math {
+
+    struct Matrix;
     
     struct Ray {
         Tuple origin;
@@ -11,5 +13,7 @@ namespace ray_tracer::math {
             return origin + (t * direction);
         }
     };
+
+    Ray transform_ray(const Ray &ray, const Matrix &mat);
 
 }

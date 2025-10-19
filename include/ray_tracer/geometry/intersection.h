@@ -1,7 +1,6 @@
 #pragma once
 #include <ray_tracer/geometry/sphere.h>
 #include <ray_tracer/math/ray.h>
-
 #include <vector>
 
 using ray_tracer::geometry::Sphere;
