@@ -11,12 +11,19 @@ add_library(ray_tracer
   src/geometry/intersection.cpp
   src/geometry/sphere.cpp
   src/math/ray.cpp
+  src/math/tuple.cpp
+  src/lighting/light.cpp
+  src/lighting/material.cpp
 )
 target_include_directories(ray_tracer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 add_executable(plot_projectile apps/plot_projectile.cpp)
-add_executable(clock_face apps/clock_face.cpp)
 target_link_libraries(plot_projectile PRIVATE ray_tracer)
+add_executable(clock_face apps/clock_face.cpp)
 target_link_libraries(clock_face PRIVATE ray_tracer)
+add_executable(draw_circle apps/draw_circle.cpp)
+target_link_libraries(draw_circle PRIVATE ray_tracer)
+add_executable(draw_shaded_circle apps/draw_shaded_circle.cpp)
+target_link_libraries(draw_shaded_circle PRIVATE ray_tracer)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -36,6 +43,7 @@ add_executable(unit_tests
     tests/ray_tests.cpp
     tests/intersection_tests.cpp
     tests/sphere_tests.cpp
+    tests/light_tests.cpp
     )
 target_include_directories(unit_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 target_link_libraries(unit_tests PRIVATE ray_tracer GTest::gtest_main)

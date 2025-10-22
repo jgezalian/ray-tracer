@@ -78,5 +78,7 @@ inline Tuple cross(const Tuple& t, const Tuple& v) {
     return Tuple(t.y * v.z - t.z * v.y, t.z * v.x - t.x * v.z, t.x * v.y - t.y * v.x, 0);
 }
 
+Tuple reflect(const Tuple &in, const Tuple &normal);
+
 }  // namespace ray_tracer::math
    // namespace ray_tracer::math

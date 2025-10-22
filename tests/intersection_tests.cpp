@@ -27,7 +27,6 @@ TEST(Intersection, hit_positive_t) {
     const Intersection i2{2, sphere};
     const std::vector<Intersection> xs = intersections({i1, i2});
     const Intersection* i = hit(xs);
-    std::cout << i->t << '\n';
     intersection_eq(*i, i1);
 }
 

@@ -1,24 +1,23 @@
 #pragma once
 #include <ray_tracer/math/tuple.h>
 
-using ray_tracer::math::Tuple;
 
 struct Projectile {
-    Tuple pos;
-    Tuple vel;
+    ray_tracer::math::Tuple pos;
+    ray_tracer::math::Tuple vel;
 
-    Projectile(const Tuple& pos, const Tuple& vel) : pos(pos), vel(vel) {}
+    Projectile(const ray_tracer::math::Tuple& pos, const ray_tracer::math::Tuple& vel) : pos(pos), vel(vel) {}
 };
 
 struct Environment {
-    Tuple grav;
-    Tuple wind;
+    ray_tracer::math::Tuple grav;
+    ray_tracer::math::Tuple wind;
 
-    Environment(const Tuple& grav, const Tuple& wind) : grav(grav), wind(wind) {}
+    Environment(const ray_tracer::math::Tuple& grav, const ray_tracer::math::Tuple& wind) : grav(grav), wind(wind) {}
 };
 
 inline Projectile launch(const Projectile& p, const Environment& e) {
-    Tuple pos_i = p.pos + p.vel;
-    Tuple vel_i = p.vel + e.grav + e.wind;
+    ray_tracer::math::Tuple pos_i = p.pos + p.vel;
+    ray_tracer::math::Tuple vel_i = p.vel + e.grav + e.wind;
     return Projectile(pos_i, vel_i);
 }

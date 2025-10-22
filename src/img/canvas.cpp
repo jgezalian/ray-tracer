@@ -65,4 +65,5 @@ std::string canvas_to_ppm(const Canvas& canvas) {
     return ppm_text;
 }
 
+
 }  // namespace ray_tracer::img

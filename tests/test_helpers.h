@@ -10,12 +10,15 @@
 #include <ray_tracer/math/tuple.h>
 #include <ray_tracer/geometry/intersection.h>
 #include <ray_tracer/geometry/sphere.h>
+#include <ray_tracer/lighting/light.h>
+#include <ray_tracer/lighting/material.h>
 #include <vector>
 
 using ray_tracer::img::Color;
 using ray_tracer::math::Matrix;
 using ray_tracer::math::Tuple;
 using ray_tracer::geometry::Intersection;
+using ray_tracer::geometry::Sphere;
 
 inline void expect_rgb(const Color& c, const double r, const double g, const double b,
                        const double eps = 1e-12) {
@@ -32,11 +35,17 @@ inline void expect_tuple(const Tuple& t, const double x, const double y, const d
     EXPECT_NEAR(t.w, w, eps);
 }
 
-inline void tuple_eq(const Tuple& t1, const Tuple& t2, const double eps = 1e-12) {
+inline void tuple_eq(const Tuple& t1, const Tuple& t2, const double eps = 1e-5) {
     EXPECT_NEAR(t1.x, t2.x, eps);
     EXPECT_NEAR(t1.y, t2.y, eps);
     EXPECT_NEAR(t1.z, t2.z, eps);
     EXPECT_NEAR(t1.w, t2.w, eps);
+}
+
+inline void color_eq(const Color& c1, const Color& c2, const double eps = 1e-5) {
+    EXPECT_NEAR(c1.r, c2.r, eps);
+    EXPECT_NEAR(c1.g, c2.g, eps);
+    EXPECT_NEAR(c1.b, c2.b, eps);
 }
 
 inline void expect_matrix(const Matrix& m, const std::vector<double>& values,

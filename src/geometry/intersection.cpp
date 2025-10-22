@@ -2,16 +2,15 @@
 #include <ray_tracer/geometry/sphere.h>
 #include <ray_tracer/math/ray.h>
 
-
-
 namespace ray_tracer::geometry {
 
+using math::point;
+using math::Tuple;
+using math::transform_ray;
+using math::inverse;
+using math::print_matrix;
+using math::Ray;
 
-using ray_tracer::math::point;
-using ray_tracer::math::Tuple;
-using ray_tracer::math::transform_ray;
-using ray_tracer::math::inverse;
-using ray_tracer::math::print_matrix;
 
 
 std::vector<Intersection> intersect(const Sphere &sphere, const Ray &ray) {
@@ -27,7 +26,7 @@ std::vector<Intersection> intersect(const Sphere &sphere, const Ray &ray) {
 
     const Intersection i1 = Intersection(t1, sphere);
     const Intersection i2 = Intersection(t2, sphere);
-
+    
     return intersections({i1, i2});
 }
 

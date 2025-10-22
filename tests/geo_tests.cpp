@@ -76,3 +76,17 @@ TEST(Geometry, tuple_cross) {
     const Tuple v2{-1.0, -2.0, -3.0, 0.0};
     expect_tuple(cross(v1, v2), 0.0, 0.0, 0.0, 0.0);
 }
+
+TEST(Geometry, reflect) {
+    const Tuple v = vector(1, -1, 0);
+    const Tuple n = vector(0, 1, 0);
+    Tuple r = reflect(v, n);
+    tuple_eq(r, vector(1, 1, 0));
+}
+
+TEST(Geometry, reflect_slanted) {
+    const Tuple v = vector(0, -1, 0);
+    const Tuple n = vector(std::sqrt(2)/2, std::sqrt(2)/2, 0);
+    Tuple r = reflect(v, n);
+    tuple_eq(r, vector(1, 0, 0));
+}
