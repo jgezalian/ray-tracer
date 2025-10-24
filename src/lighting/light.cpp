@@ -11,8 +11,11 @@ using math::point;
 using math::reflect;
 using math::Tuple;
 
+
 Light::Light(const Tuple &position, const Color &intensity)
     : position(position), intensity(intensity) {}
+
+
 
 Color lighting(const Material &m, const Light &light,
                                 const Tuple &point, const Tuple &eyev,

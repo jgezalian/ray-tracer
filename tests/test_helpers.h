@@ -12,6 +12,7 @@
 #include <ray_tracer/geometry/sphere.h>
 #include <ray_tracer/lighting/light.h>
 #include <ray_tracer/lighting/material.h>
+#include <ray_tracer/world/world.h>
 #include <vector>
 
 using ray_tracer::img::Color;
@@ -19,6 +20,7 @@ using ray_tracer::math::Matrix;
 using ray_tracer::math::Tuple;
 using ray_tracer::geometry::Intersection;
 using ray_tracer::geometry::Sphere;
+using ray_tracer::lighting::Light;
 
 inline void expect_rgb(const Color& c, const double r, const double g, const double b,
                        const double eps = 1e-12) {
@@ -73,4 +75,9 @@ inline void expect_intersection(const Intersection i, double t, Sphere sphere) {
 inline void intersection_eq(const Intersection i1, const Intersection i2) {
     EXPECT_NEAR(i1.t, i2.t, 1e-12);
     EXPECT_EQ(i1.sphere.id, i2.sphere.id);
+}
+
+inline void light_eq(const Light l1, const Light l2) {
+    tuple_eq(l1.position, l2.position);
+    color_eq(l1.intensity, l2.intensity);
 }

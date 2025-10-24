@@ -8,7 +8,7 @@ namespace ray_tracer::lighting {
 struct Light {
     math::Tuple position;
     img::Color intensity;
-
+    Light() {}
     Light(const math::Tuple& position, const img::Color& intensity);
 };
 

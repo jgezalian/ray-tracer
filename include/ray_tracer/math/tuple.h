@@ -12,6 +12,7 @@ struct Tuple {
     double w;
     static constexpr double epsilon = 1e-5;
 
+    Tuple() : x(0), y(0), z(0) {}
     Tuple(double x, double y, double z, double w) : x(x), y(y), z(z), w(w) {}
 
     // if w == 1, is point

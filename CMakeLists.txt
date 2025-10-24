@@ -14,6 +14,7 @@ add_library(ray_tracer
   src/math/tuple.cpp
   src/lighting/light.cpp
   src/lighting/material.cpp
+  src/world/world.cpp
 )
 target_include_directories(ray_tracer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 add_executable(plot_projectile apps/plot_projectile.cpp)
@@ -44,6 +45,7 @@ add_executable(unit_tests
     tests/intersection_tests.cpp
     tests/sphere_tests.cpp
     tests/light_tests.cpp
+    tests/world_tests.cpp
     )
 target_include_directories(unit_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 target_link_libraries(unit_tests PRIVATE ray_tracer GTest::gtest_main)

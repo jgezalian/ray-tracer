@@ -10,6 +10,8 @@
 
 #include <iostream>
 
+constexpr double pi = 3.14159265358979323846;
+
 using ray_tracer::geometry::intersect;
 using ray_tracer::geometry::Intersection;
 using ray_tracer::geometry::Sphere;
@@ -23,15 +25,20 @@ using ray_tracer::math::point;
 using ray_tracer::math::Ray;
 using ray_tracer::math::scaling;
 using ray_tracer::math::translation;
+using ray_tracer::math::shearing;
 using ray_tracer::math::Tuple;
 using ray_tracer::math::vector;
 using ray_tracer::img::canvas_to_ppm;
 using ray_tracer::geometry::hit;
 using ray_tracer::lighting::lighting;
+using ray_tracer::math::rotate_z;
+using ray_tracer::math::rotate_x;
+
+
 
 void draw_shaded_circle() {
     
-    Tuple ray_origin = point(0, 0, -5);
+    Tuple ray_origin = point(0, 0, -10);
     double wall_z = 10;
     double wall_size = 10;
     std::size_t canvas_pixels = 1000;
@@ -40,9 +47,13 @@ void draw_shaded_circle() {
     Canvas canvas{canvas_pixels, canvas_pixels};
     Color red = Color{1.0, 0, 0};
     Sphere sphere;
-    sphere.material.color = Color{1, 0.2, 1};
-    Tuple light_pos = point(-10, 10, -10);
-    Color light_color{1, 0.2, 1};
+    Matrix trans1 = scaling(2, 0.3, 2);
+    Matrix trans2 = rotate_x(pi/3);
+    Matrix chain = chain_transform({trans1, trans2});
+    sphere.set_transform(chain);
+    sphere.material.color = Color{0.0, 1, 0.0};
+    Tuple light_pos = point(0, 0, -10);
+    Color light_color{1.0, 1.0, 1.0};
     Light light{light_pos, light_color};
 
     for(int y = 0; y <= canvas_pixels - 1; ++y) {
