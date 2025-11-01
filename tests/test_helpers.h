@@ -67,14 +67,14 @@ inline void expect_matrix_eq(const Matrix& a, const Matrix& b) {
     }
 }
 
-inline void expect_intersection(const Intersection i, double t, Sphere sphere) {
+inline void expect_intersection(const Intersection i, double t, Sphere* sphere) {
     EXPECT_NEAR(i.t, t, 1e-12);
-    EXPECT_EQ(i.sphere.id, sphere.id);
+    EXPECT_EQ(i.shape->id, sphere->id);
 }
 
 inline void intersection_eq(const Intersection i1, const Intersection i2) {
     EXPECT_NEAR(i1.t, i2.t, 1e-12);
-    EXPECT_EQ(i1.sphere.id, i2.sphere.id);
+    EXPECT_EQ(i1.shape->id, i2.shape->id);
 }
 
 inline void light_eq(const Light l1, const Light l2) {

@@ -32,8 +32,8 @@ void draw_circle() {
     double half_width = (canvas.width - 1) / 2.0;
     double half_height = (canvas.height - 1) / 2.0;
     const Matrix translate = translation(half_width, half_height, 0);
-    Sphere sphere;
-    sphere.material.color = Color{1, 0.2, 1};
+    Sphere* sphere = new Sphere();
+    sphere->material.color = Color{1, 0.2, 1};
     const Tuple light_pos = point(-10, 10, -10);
     const Color light_color = Color{1, 1, 1};
     const Light light{light_pos, light_color};
@@ -41,7 +41,7 @@ void draw_circle() {
     Matrix scale1(scaling(1, 0.5, 1));
     Matrix scale2(scaling(400, 400, 400));
     Matrix trans_chain = chain_transform({scale1, scale2});
-    sphere.set_transform(trans_chain);
+    sphere->set_transform(trans_chain);
     for (int y = -1 * half_height; y <= half_height; ++y) {
         const Ray ray = Ray(point(-1 * half_width, y, 0), vector(1, 0, 0));
         const std::vector<Intersection> xs = intersect(sphere, ray);

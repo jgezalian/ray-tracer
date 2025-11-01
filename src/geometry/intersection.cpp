@@ -13,19 +13,19 @@ using math::Ray;
 
 
 
-std::vector<Intersection> intersect(const Sphere &sphere, const Ray &ray) {
-    const Ray t_ray = transform_ray(ray, inverse(sphere.transform));
-    Tuple sphere_to_ray{t_ray.origin - point(0, 0, 0)};
+std::vector<Intersection> intersect(const Shape* shape, const Ray &ray) {
+    const Ray t_ray = transform_ray(ray, inverse(shape->transform));
+    Tuple shape_to_ray{t_ray.origin - point(0, 0, 0)};
     double a = dot(t_ray.direction, t_ray.direction);
-    double b = 2 * dot(t_ray.direction, sphere_to_ray);
-    double c = dot(sphere_to_ray, sphere_to_ray) - 1;
+    double b = 2 * dot(t_ray.direction, shape_to_ray);
+    double c = dot(shape_to_ray, shape_to_ray) - 1;
     double discriminant = std::pow(b, 2) - (4 * a * c);
     if (discriminant < 0) return {};
     double t1 = (-1 * b - std::sqrt(discriminant)) / (2 * a);
     double t2 = (-1 * b + std::sqrt(discriminant)) / (2 * a);
 
-    const Intersection i1 = Intersection(t1, sphere);
-    const Intersection i2 = Intersection(t2, sphere);
+    const Intersection i1 = Intersection(t1, shape);
+    const Intersection i2 = Intersection(t2, shape);
     
     return intersections({i1, i2});
 }

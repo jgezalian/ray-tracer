@@ -46,12 +46,12 @@ void draw_shaded_circle() {
     double half_wall = wall_size/2;
     Canvas canvas{canvas_pixels, canvas_pixels};
     Color red = Color{1.0, 0, 0};
-    Sphere sphere;
+    Sphere* sphere = new Sphere;
     Matrix trans1 = scaling(2, 0.3, 2);
     Matrix trans2 = rotate_x(pi/3);
     Matrix chain = chain_transform({trans1, trans2});
-    sphere.set_transform(chain);
-    sphere.material.color = Color{0.0, 1, 0.0};
+    sphere->set_transform(chain);
+    sphere->material.color = Color{0.0, 1, 0.0};
     Tuple light_pos = point(0, 0, -10);
     Color light_color{1.0, 1.0, 1.0};
     Light light{light_pos, light_color};
@@ -66,9 +66,9 @@ void draw_shaded_circle() {
             const Intersection* i = hit(xs);
             if(i != nullptr) {
                 Tuple point = ray.position(i->t);
-                Tuple normal = sphere.normal_at(point);
+                Tuple normal = sphere->normal_at(point);
                 Tuple eyev = -ray.direction;
-                Color shade = lighting(sphere.material, light, point, eyev, normal);
+                Color shade = lighting(sphere->material, light, point, eyev, normal);
                 canvas.write_pixel(x, y, shade);
             }
         }

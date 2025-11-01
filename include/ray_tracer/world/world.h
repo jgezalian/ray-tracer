@@ -1,14 +1,19 @@
 #pragma once
 #include <vector>
-#include <ray_tracer/geometry/sphere.h>
+#include <ray_tracer/geometry/shape.h>
 #include <ray_tracer/lighting/light.h>
 #include <ray_tracer/geometry/intersection.h>
 
 namespace ray_tracer::world {
 
     struct World{   
+        World() = default;
+        ~World();
 
-        std::vector<geometry::Sphere> objects;
+        void add(geometry::Shape* shape) {
+            objects.push_back(shape);
+        }
+        std::vector<geometry::Shape*> objects;
         lighting::Light light;  
         bool has_light = false;
         

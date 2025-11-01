@@ -5,14 +5,14 @@ using namespace::ray_tracer::math;
 using namespace::ray_tracer::geometry;
 
 TEST(Intersection, members) {
-    const Sphere sphere;
+    const Sphere* sphere = new Sphere();
     const Intersection intersection{3.5, sphere};
     EXPECT_NEAR(intersection.t, 3.5, 1e-12);
-    EXPECT_EQ(sphere.id, 5);
+    EXPECT_EQ(sphere->id, 5);
 }
 
 TEST(Intersection, aggregate_inters) {
-    const Sphere sphere;
+    const Sphere* sphere = new Sphere();
     const Intersection i1{1, sphere};
     const Intersection i2{2, sphere};
     const std::vector<Intersection> xs = intersections({i1, i2});
@@ -22,7 +22,7 @@ TEST(Intersection, aggregate_inters) {
 }
 
 TEST(Intersection, hit_positive_t) {
-    const Sphere sphere;
+    const Sphere* sphere = new Sphere();
     const Intersection i1{1, sphere};
     const Intersection i2{2, sphere};
     const std::vector<Intersection> xs = intersections({i1, i2});
@@ -31,7 +31,7 @@ TEST(Intersection, hit_positive_t) {
 }
 
 TEST(Intersection, hit_mixed_t) {
-    const Sphere sphere;
+    const Sphere* sphere = new Sphere();
     const Intersection i1{-1, sphere};
     const Intersection i2{1, sphere};
     const std::vector<Intersection> xs = intersections({i1, i2});
@@ -40,7 +40,7 @@ TEST(Intersection, hit_mixed_t) {
 }
 
 TEST(Intersection, hit_negative_t) {
-    const Sphere sphere;
+    const Sphere* sphere = new Sphere();
     const Intersection i1{-2, sphere};
     const Intersection i2{-1, sphere};
     const std::vector<Intersection> xs = intersections({i1, i2});
@@ -49,7 +49,7 @@ TEST(Intersection, hit_negative_t) {
 }
 
 TEST(Intersection, many) {
-    const Sphere sphere;
+    const Sphere* sphere = new Sphere();
     const Intersection i1{5, sphere};
     const Intersection i2{7, sphere};
     const Intersection i3{-3, sphere};
