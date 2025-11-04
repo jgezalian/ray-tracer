@@ -8,6 +8,7 @@ using math::norm;
 using math::point;
 using math::Tuple;
 
+
 Tuple Sphere::normal_at(const Tuple &world_point) const {
     const Tuple object_point(inverse(transform) * world_point);
     const Tuple object_normal(object_point - point(0, 0, 0));

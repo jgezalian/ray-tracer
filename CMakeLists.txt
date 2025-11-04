@@ -1,5 +1,7 @@
-cmake_minimum_required(VERSION 3.22)
-project(ray_tracer)
+cmake_minimum_required(VERSION 3.15...4.0)
+project(ray_tracer VERSION 1.0
+        DESCRIPTION "ray tracer from scatch in c++"
+        LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -49,6 +51,8 @@ add_executable(unit_tests
     )
 target_include_directories(unit_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 target_link_libraries(unit_tests PRIVATE ray_tracer GTest::gtest_main)
+
+
 include(GoogleTest)         # helper macros
 gtest_discover_tests(unit_tests)  # auto-register tests with CTest
 
