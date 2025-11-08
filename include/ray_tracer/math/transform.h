@@ -11,5 +11,6 @@ Matrix rotate_z(double r);
 Matrix tuple_to_mat(const Tuple &t);
 Matrix shearing(double x_y, double x_z, double y_x, double y_z, double z_x, double z_y);
 Matrix chain_transform(std::vector<Matrix> trans_matrices);
+Matrix view_transform(const Tuple &from, const Tuple &to, const Tuple &up);
 
 }

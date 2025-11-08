@@ -1,5 +1,6 @@
 #pragma once
 #include <ray_tracer/math/util.h>
+
 #include <cassert>
 #include <cmath>
 #include <iostream>
@@ -23,10 +24,7 @@ struct Tuple {
 };
 
 inline void print_tuple(const Tuple& t) {
-    std::cout << "x: " << t.x << '\n';
-    std::cout << "y: " << t.y << '\n';
-    std::cout << "z: " << t.z << '\n';
-    std::cout << "w: " << t.w << '\n';
+    std::cout << " x: " << t.x << " y: " << t.y << " z: " << t.z << " w: " << t.w << '\n';
 }
 
 inline Tuple point(double x, double y, double z) { return Tuple(x, y, z, 1.0); }
@@ -79,7 +77,7 @@ inline Tuple cross(const Tuple& t, const Tuple& v) {
     return Tuple(t.y * v.z - t.z * v.y, t.z * v.x - t.x * v.z, t.x * v.y - t.y * v.x, 0);
 }
 
-Tuple reflect(const Tuple &in, const Tuple &normal);
+Tuple reflect(const Tuple& in, const Tuple& normal);
 
 }  // namespace ray_tracer::math
    // namespace ray_tracer::math

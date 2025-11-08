@@ -14,8 +14,12 @@ Canvas::Canvas(std::size_t width, std::size_t height)
       height(height),
       pixels(height, std::vector<Color>(width, Color(0.0, 0.0, 0.0))) {}
 
-void Canvas::write_pixel(int x, int y, const Color& c) {
-    if (x < 0 || y < 0 || y >= static_cast<int>(height) || x >= static_cast<int>(width)) return;
+Color Canvas::pixel_at(std::size_t x, std::size_t y) const {
+    return pixels[x][y];
+}
+
+void Canvas::write_pixel(std::size_t x, std::size_t y, const Color& c) {
+    if (y >= height || x >= width) return;
     pixels[static_cast<std::size_t>(y)][static_cast<std::size_t>(x)] = c;
 }
 

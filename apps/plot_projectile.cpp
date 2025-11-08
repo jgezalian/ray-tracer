@@ -20,9 +20,9 @@ int main() {
     Canvas canvas = Canvas(1000, 1000);
 
     while (p.pos.y >= 0) {
-        int x = static_cast<int>(std::round(p.pos.x));
-        int y = static_cast<int>(std::round((canvas.height - 1) - p.pos.y));
-        if (x >= 0 && x < static_cast<int>(canvas.width) && y >= 0 && y < static_cast<int>(canvas.height)) {
+        std::size_t x = static_cast<std::size_t>(std::round(p.pos.x));
+        std::size_t y = static_cast<std::size_t>(std::round((canvas.height - 1) - p.pos.y));
+        if (x >= 0 && x < canvas.width && y >= 0 && y < canvas.height) {
             canvas.write_pixel(x, y, Color(1.0, 1.0, 1.0));
         }
         p = launch(p, e);

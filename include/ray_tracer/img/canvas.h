@@ -3,6 +3,7 @@
 #include <fstream>
 #include <vector>
 
+
 #include "color.h"
 
 namespace ray_tracer::img {
@@ -15,7 +16,8 @@ struct Canvas {
     // initalize canvas of width x height with all black pixels
     Canvas(std::size_t width, std::size_t height);
 
-    void write_pixel(int x, int y, const Color &c);
+    void write_pixel(std::size_t x, std::size_t y, const Color &c);
+    Color pixel_at(std::size_t x, std::size_t y) const;
 };
 
 inline constexpr int limit255(int rgb_val) noexcept {

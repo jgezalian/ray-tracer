@@ -3,6 +3,8 @@
 
 using namespace::ray_tracer::math;
 using namespace::ray_tracer::geometry;
+using ray_tracer::helpers::Computation;
+using ray_tracer::helpers::prepare_computation;
 
 TEST(Intersection, members) {
     const Sphere sphere;
@@ -60,3 +62,23 @@ TEST(Intersection, many) {
 
 }
 
+TEST(Intersection, precompute) {
+    const Ray ray{point(0, 0, -5), vector(0, 0, 1)};
+    Sphere sphere;
+    const Intersection i{4, &sphere};
+    const Computation comps = prepare_computation(i, ray);
+    EXPECT_NEAR(comps.t, i.t, 1e-5);
+    EXPECT_EQ(comps.shape, i.shape);
+    tuple_eq(comps.point, point(0, 0, -1));
+    tuple_eq(comps.eyev, vector(0, 0, -1));
+    tuple_eq(comps.normalv, vector(0, 0, -1));
+}
+
+TEST(Intersection, precompute_hit_inside) {
+    const Ray ray{point(0, 0, 0), vector(0, 0, 1)};
+    Sphere sphere;
+    const Intersection i{1,&sphere};
+    const Computation comps = prepare_computation(i, ray);
+    tuple_eq(comps.point, point(0, 0, 1));
+    tuple_eq(comps.eyev, vector(0, 0, -1));
+}

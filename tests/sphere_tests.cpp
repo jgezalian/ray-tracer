@@ -4,6 +4,7 @@
 using namespace::ray_tracer::math;
 using namespace::ray_tracer::geometry;
 using namespace::ray_tracer::lighting;
+using ray_tracer::helpers::Computation;
 
 
 TEST(Sphere, set_transform) {

@@ -77,7 +77,6 @@ TEST(Ray, scale_ray) {
     const Ray ray{point(1, 2, 3), vector(0, 1, 0)};
     const Matrix scale = scaling(2, 3, 4);
     const Ray r2 = transform_ray(ray, scale);
-    std::cout << r2.origin.x << '\n';
     expect_tuple(r2.origin, 2, 6, 12, 1);
     expect_tuple(r2.direction, 0, 3, 0, 0);
 }

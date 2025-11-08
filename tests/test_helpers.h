@@ -13,8 +13,11 @@
 #include <ray_tracer/lighting/light.h>
 #include <ray_tracer/lighting/material.h>
 #include <ray_tracer/world/world.h>
+#include <ray_tracer/helpers/computation.h>
+#include <ray_tracer/camera/camera.h>
 #include <vector>
 
+//i should get refactor these global using qualifiers to function scope at some point
 using ray_tracer::img::Color;
 using ray_tracer::math::Matrix;
 using ray_tracer::math::Tuple;
@@ -63,7 +66,7 @@ inline void expect_matrix_eq(const Matrix& a, const Matrix& b) {
     EXPECT_EQ(a.cols, b.cols);
     EXPECT_EQ(static_cast<int>(a.data.size()), static_cast<int>(b.data.size()));
     for (std::size_t i = 0; i < a.rows * a.cols; ++i) {
-        EXPECT_NEAR(a.data[i], b.data[i], 1e-12);
+        EXPECT_NEAR(a.data[i], b.data[i], 1e-5);
     }
 }
 

@@ -75,4 +75,22 @@ Matrix tuple_to_mat(const Tuple &t) {
     return t_col_mat;
 }
 
+Matrix view_transform(const Tuple &from, const Tuple &to, const Tuple &up) {
+    Matrix orientation(Matrix::identity(4));
+    const Tuple forward = norm(to - from);
+    const Tuple left = cross(forward, norm(up));
+    const Tuple true_up = cross(left, forward);
+    orientation(0, 0, left.x);
+    orientation(0, 1, left.y);
+    orientation(0, 2, left.z);
+    orientation(1, 0, true_up.x);
+    orientation(1, 1, true_up.y);
+    orientation(1, 2, true_up.z);
+    orientation(2, 0, -1 * forward.x);
+    orientation(2, 1, -1 * forward.y);
+    orientation(2, 2, -1 * forward.z);
+    return(orientation * translation(-1 * from.x, -1 * from.y, -1 * from.z));
+}
+
+
 }  // namespace ray_tracer::math

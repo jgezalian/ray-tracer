@@ -12,6 +12,10 @@ using math::scaling;
 using math::Ray;
 using geometry::Intersection;
 using geometry::intersect;
+using img::Color;
+using lighting::lighting;
+using helpers::prepare_computation;
+using helpers::Computation;
 
 World::~World() {
     for(auto* object : objects) {
@@ -37,7 +41,7 @@ World default_world() {
     return world;
 }
 
-std::vector<ray_tracer::geometry::Intersection> intersect_world(const World &world, const Ray &ray) {
+std::vector<Intersection> intersect_world(const World &world, const Ray &ray) {
     std::vector<Intersection> xs;
     if(world.objects.size() == 0) return {};
     for(const auto* object : world.objects) {
@@ -49,5 +53,21 @@ std::vector<ray_tracer::geometry::Intersection> intersect_world(const World &wor
     std::sort(xs.begin(), xs.end(), [](const Intersection &i1, const Intersection &i2) {return i1.t < i2.t;} );
     return xs;
 }
+
+Color shade_hit(const World &world, const helpers::Computation &comps) {
+    return lighting(comps.shape->material, world.light, comps.point, comps.eyev, comps.normalv);
+}
+
+Color color_at(const World &world, const math::Ray &ray) {
+    std::vector<Intersection> xs{intersect_world(world, ray)};
+    const Intersection* hit_ = hit(xs);
+    if(hit_ == nullptr) {
+        return Color(0, 0, 0);
+    }
+    Computation comps = prepare_computation(*hit_, ray);
+    return shade_hit(world, comps);
+
+}
+
 
 }  // namespace ray_tracer::world
