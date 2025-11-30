@@ -1,11 +1,13 @@
 # CMake
 /build/
 /cmake-build-*/
-CMakeFiles/
-CMakeCache.txt
+CMakeFiles
 *.cmake
 install_manifest.txt
 compile_commands.json
+/_deps/
+/.VSCodeCounter/
+/bin/
 
 # Binaries
 *.o
