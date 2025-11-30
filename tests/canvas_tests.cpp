@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
-#include "test_helpers.h"
+
 #include <iostream>
+
+#include "test_helpers.h"
 
 using ray_tracer::img::Canvas;
 using ray_tracer::img::Color;
@@ -15,7 +17,7 @@ TEST(Canvas, init_black) {
 
     for (std::size_t i = 0; i < h; ++i) {
         for (std::size_t j = 0; j < w; ++j) {
-            expect_rgb(canvas.pixels[i][j], 0.0, 0.0, 0.0);
+            expect_rgb(canvas.pixel_at(i, j), 0.0, 0.0, 0.0);
         }
     }
 }
@@ -24,7 +26,7 @@ TEST(Canvas, write_pixel) {
     Canvas canvas{100, 100};
     Color color{1.0, 1.0, 1.0};
     canvas.write_pixel(99, 99, color);
-    expect_rgb(canvas.pixels[99][99], 1.0, 1.0, 1.0);
+    expect_rgb(canvas.pixel_at(99, 99), 1.0, 1.0, 1.0);
 }
 
 TEST(Canvas, canvas_to_ppm) {

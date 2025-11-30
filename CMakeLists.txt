@@ -3,7 +3,6 @@ project(ray_tracer VERSION 1.0
         DESCRIPTION "ray tracer from scratch in c++"
         LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 add_library(ray_tracer
@@ -21,6 +20,22 @@ add_library(ray_tracer
   src/camera/camera.cpp
 )
 target_include_directories(ray_tracer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+
+if(EMSCRIPTEN)
+
+add_executable(first_scene apps/first_scene.cpp)
+target_link_libraries(first_scene PRIVATE ray_tracer)
+
+target_compile_options(ray_tracer PRIVATE -O2)
+target_link_options(first_scene PRIVATE "-sMODULARIZE=1"
+                                    "-sEXPORT_NAME=scene_canvas_test"
+                                    "-sEXPORTED_RUNTIME_METHODS=['cwrap', 'HEAPU8']"
+                                    "-sEXPORTED_FUNCTIONS=['_malloc','_first_scene_render_pixels']")
+endif()
+
+if(!EMSCRIPTEN)
+
 add_executable(plot_projectile apps/plot_projectile.cpp)
 target_link_libraries(plot_projectile PRIVATE ray_tracer)
 add_executable(clock_face apps/clock_face.cpp)
@@ -29,8 +44,9 @@ add_executable(draw_circle apps/draw_circle.cpp)
 target_link_libraries(draw_circle PRIVATE ray_tracer)
 add_executable(draw_shaded_circle apps/draw_shaded_circle.cpp)
 target_link_libraries(draw_shaded_circle PRIVATE ray_tracer)
-add_executable(first_scene apps/first_scene.cpp)
-target_link_libraries(first_scene PRIVATE ray_tracer)
+# add_executable(first_scene apps/first_scene.cpp)
+# target_link_libraries(first_scene PRIVATE ray_tracer)
+
 
 include(FetchContent)
 FetchContent_Declare(
@@ -59,14 +75,14 @@ target_link_libraries(unit_tests PRIVATE ray_tracer GTest::gtest_main)
 
 
 include(GoogleTest)         # helper macros
-gtest_discover_tests(unit_tests)  # auto-register tests with CTest
+gtest_discover_tests(unit_tests DISCOVERY_MODE PRE_TEST)  # auto-register tests with CTest
 
 add_executable(misc_tests 
     tests/misc_tests.cpp)
 target_include_directories(misc_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 target_link_libraries(misc_tests PRIVATE ray_tracer GTest::gtest_main)
 include(GoogleTest)         # helper macros
-gtest_discover_tests(misc_tests)  # auto-register tests with CTest
+gtest_discover_tests(misc_tests DISCOVERY_MODE PRE_TEST)  # auto-register tests with CTest
 
 foreach(t ray_tracer unit_tests plot_projectile misc_tests)
     target_compile_options(${t} PRIVATE
@@ -74,3 +90,5 @@ foreach(t ray_tracer unit_tests plot_projectile misc_tests)
     -Wconversion -Wdouble-promotion -Wfloat-conversion -Wsign-conversion
     )
 endforeach()
+
+endif()

@@ -60,7 +60,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = "/Users/jackgezalian/Development/C++ Projects/ray_tracer_challenge"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/Users/jackgezalian/Development/C++ Projects/ray_tracer_challenge/build_debug"
+CMAKE_BINARY_DIR = "/Users/jackgezalian/Development/C++ Projects/ray_tracer_challenge/build_emscripten"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,16 +87,16 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/jackgezalian/Development/C++ Projects/ray_tracer_challenge/build_debug/CMakeFiles" "/Users/jackgezalian/Development/C++ Projects/ray_tracer_challenge/build_debug//CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/jackgezalian/Development/C++ Projects/ray_tracer_challenge/build_emscripten/CMakeFiles" "/Users/jackgezalian/Development/C++ Projects/ray_tracer_challenge/build_emscripten//CMakeFiles/progress.marks"
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/jackgezalian/Development/C++ Projects/ray_tracer_challenge/build_debug/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/jackgezalian/Development/C++ Projects/ray_tracer_challenge/build_emscripten/CMakeFiles" 0
 .PHONY : all
 
 # The main codegen target
 codegen: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/jackgezalian/Development/C++ Projects/ray_tracer_challenge/build_debug/CMakeFiles" "/Users/jackgezalian/Development/C++ Projects/ray_tracer_challenge/build_debug//CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/jackgezalian/Development/C++ Projects/ray_tracer_challenge/build_emscripten/CMakeFiles" "/Users/jackgezalian/Development/C++ Projects/ray_tracer_challenge/build_emscripten//CMakeFiles/progress.marks"
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 codegen
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/jackgezalian/Development/C++ Projects/ray_tracer_challenge/build_debug/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/jackgezalian/Development/C++ Projects/ray_tracer_challenge/build_emscripten/CMakeFiles" 0
 .PHONY : codegen
 
 # The main clean target
@@ -135,6 +135,43 @@ ray_tracer: cmake_check_build_system
 ray_tracer/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ray_tracer.dir/build.make CMakeFiles/ray_tracer.dir/build
 .PHONY : ray_tracer/fast
+
+#=============================================================================
+# Target rules for targets named first_scene
+
+# Build rule for target.
+first_scene: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 first_scene
+.PHONY : first_scene
+
+# fast build rule for target.
+first_scene/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/first_scene.dir/build.make CMakeFiles/first_scene.dir/build
+.PHONY : first_scene/fast
+
+apps/first_scene.o: apps/first_scene.cpp.o
+.PHONY : apps/first_scene.o
+
+# target to build an object file
+apps/first_scene.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/first_scene.dir/build.make CMakeFiles/first_scene.dir/apps/first_scene.cpp.o
+.PHONY : apps/first_scene.cpp.o
+
+apps/first_scene.i: apps/first_scene.cpp.i
+.PHONY : apps/first_scene.i
+
+# target to preprocess a source file
+apps/first_scene.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/first_scene.dir/build.make CMakeFiles/first_scene.dir/apps/first_scene.cpp.i
+.PHONY : apps/first_scene.cpp.i
+
+apps/first_scene.s: apps/first_scene.cpp.s
+.PHONY : apps/first_scene.s
+
+# target to generate assembly for a file
+apps/first_scene.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/first_scene.dir/build.make CMakeFiles/first_scene.dir/apps/first_scene.cpp.s
+.PHONY : apps/first_scene.cpp.s
 
 src/camera/camera.o: src/camera/camera.cpp.o
 .PHONY : src/camera/camera.o
@@ -433,7 +470,11 @@ help:
 	@echo "... codegen"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... first_scene"
 	@echo "... ray_tracer"
+	@echo "... apps/first_scene.o"
+	@echo "... apps/first_scene.i"
+	@echo "... apps/first_scene.s"
 	@echo "... src/camera/camera.o"
 	@echo "... src/camera/camera.i"
 	@echo "... src/camera/camera.s"
