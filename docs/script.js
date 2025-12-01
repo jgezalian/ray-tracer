@@ -1,5 +1,5 @@
-let height = 300;
-let width = 300;
+let height = 1000;
+let width = 1000;
 let sc_test = null;
 let pixel_arr = null;
 scene_canvas_test().then((Module) => {
