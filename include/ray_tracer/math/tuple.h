@@ -1,6 +1,5 @@
 #pragma once
 #include <ray_tracer/math/util.h>
-
 #include <cassert>
 #include <cmath>
 #include <iostream>
@@ -22,6 +21,7 @@ struct Tuple {
     // if w == 0, is vector
     constexpr bool isVector() const noexcept { return std::abs(w - 0.0) < epsilon; }
 };
+
 
 inline void print_tuple(const Tuple& t) {
     std::cout << " x: " << t.x << " y: " << t.y << " z: " << t.z << " w: " << t.w << '\n';
@@ -51,14 +51,14 @@ inline Tuple operator/(const Tuple& t, double scalar) {
     return Tuple(t.x / scalar, t.y / scalar, t.z / scalar, t.w / scalar);
 }
 
-inline bool operator==(const Tuple& t1, const Tuple& t2) {
+inline bool operator==(const Tuple& t1, const Tuple& t2) { 
     return (dbl_eql(t1.x, t2.x) && dbl_eql(t1.y, t2.y) && dbl_eql(t1.z, t2.z) &&
             dbl_eql(t1.w, t2.w));
 }
 
 inline double magnitude(const Tuple& t) {
     assert(t.isVector() && "Magnitude DNE for point");
-    return (std::hypot(t.x, t.y, t.z));
+    return ray_tracer::math::hypot(t);
 }
 
 inline Tuple norm(const Tuple& t) {

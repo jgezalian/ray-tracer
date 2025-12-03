@@ -2,6 +2,7 @@
 #include <ray_tracer/img/canvas.h>
 #include <ray_tracer/img/color.h>
 #include <ray_tracer/math/tuple.h>
+#include <ray_tracer/math/util.h>
 
 using ray_tracer::demo::launch;
 using ray_tracer::img::Canvas;
@@ -9,6 +10,7 @@ using ray_tracer::img::Color;
 using ray_tracer::math::point;
 using ray_tracer::math::Tuple;
 using ray_tracer::math::vector;
+using ray_tracer::math::norm;
 
 namespace ray_tracer::demo {
 void plot_projectile() {

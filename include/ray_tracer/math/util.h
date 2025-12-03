@@ -1,7 +1,7 @@
 #pragma once
 #include <cmath>
-
-inline bool dbl_eql(const double a, const double b) {
-    double eps = 1e-12;
-    return std::fabs(a - b) < eps;
-}
+namespace ray_tracer::math {
+struct Tuple;
+bool dbl_eql(const double a, const double b);
+double hypot(const ray_tracer::math::Tuple &t);
+}  // namespace ray_tracer::math

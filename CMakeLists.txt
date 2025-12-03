@@ -13,6 +13,7 @@ add_library(ray_tracer
   src/geometry/sphere.cpp
   src/math/ray.cpp
   src/math/tuple.cpp
+  src/math/util.cpp
   src/lighting/light.cpp
   src/lighting/material.cpp
   src/world/world.cpp
@@ -21,21 +22,21 @@ add_library(ray_tracer
 )
 target_include_directories(ray_tracer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-
 if(EMSCRIPTEN)
-
+message(STATUS "compiling with emscripten")
 add_executable(first_scene apps/first_scene.cpp)
 target_link_libraries(first_scene PRIVATE ray_tracer)
 
 target_compile_options(ray_tracer PRIVATE -O2)
 target_link_options(first_scene PRIVATE "-sMODULARIZE=1"
+                                    "-sINITIAL_MEMORY=100007936"
                                     "-sEXPORT_NAME=scene_canvas_test"
                                     "-sEXPORTED_RUNTIME_METHODS=['cwrap', 'HEAPU8']"
                                     "-sEXPORTED_FUNCTIONS=['_malloc','_first_scene_render_pixels']")
-endif()
 
-if(!EMSCRIPTEN)
 
+else()
+message(STATUS "compiling without emscripten")
 add_executable(plot_projectile apps/plot_projectile.cpp)
 target_link_libraries(plot_projectile PRIVATE ray_tracer)
 add_executable(clock_face apps/clock_face.cpp)
