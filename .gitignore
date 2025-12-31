@@ -26,3 +26,5 @@ compile_commands.json
 
 # Misc
 .DS_Store
+.gitignore
+.clang-format
