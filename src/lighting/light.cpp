@@ -1,7 +1,6 @@
 #include <ray_tracer/lighting/light.h>
 #include <ray_tracer/lighting/material.h>
 
-
 namespace ray_tracer::lighting {
 
 using img::Color;
@@ -11,15 +10,11 @@ using math::point;
 using math::reflect;
 using math::Tuple;
 
-
 Light::Light(const Tuple &position, const Color &intensity)
     : position(position), intensity(intensity) {}
 
-
-
-Color lighting(const Material &m, const Light &light,
-                                const Tuple &point, const Tuple &eyev,
-                                const Tuple &normalv) {
+Color lighting(const Material &m, const Light &light, const Tuple &point, const Tuple &eyev,
+               const Tuple &normalv) { 
     Color black{0, 0, 0};
     Color diffuse;
     Color specular;

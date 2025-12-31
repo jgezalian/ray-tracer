@@ -38,20 +38,20 @@ using ray_tracer::math::rotate_x;
 
 void draw_shaded_circle() {
     
-    Tuple ray_origin = point(0, 0, -10);
+    Tuple ray_origin = point(2, -2, -10);
     double wall_z = 10;
     double wall_size = 10;
-    std::size_t canvas_pixels = 1000;
+    std::size_t canvas_pixels = 500;
     double pixel_size = wall_size/canvas_pixels;
     double half_wall = wall_size/2;
     Canvas canvas{canvas_pixels, canvas_pixels};
     Color red = Color{1.0, 0, 0};
     Sphere* sphere = new Sphere;
-    Matrix trans1 = scaling(2, 0.3, 2);
-    Matrix trans2 = rotate_x(pi/3);
-    Matrix chain = chain_transform({trans1, trans2});
-    sphere->set_transform(chain);
-    sphere->material.color = Color{0.0, 1, 0.0};
+    //Matrix trans1 = scaling(2, 0.3, 2);
+    //Matrix trans2 = rotate_x(pi/3);
+    //Matrix chain = chain_transform({trans1, trans2});
+    //sphere->set_transform(chain);
+    sphere->material.color = Color{1, 0.2, 1};
     Tuple light_pos = point(0, 0, -10);
     Color light_color{1.0, 1.0, 1.0};
     Light light{light_pos, light_color};

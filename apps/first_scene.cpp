@@ -11,7 +11,9 @@
 #include <ray_tracer/camera/camera.h>
 #include <iostream>
 #include <string.h>
-#include "emscripten.h"
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
 
 constexpr double pi = 3.14159265358979323846;
 
@@ -54,7 +56,7 @@ void draw_scene() {
 
 
 
-    Camera camera{100, 100, pi/3}; 
+    Camera camera{200, 100, pi/2}; 
     camera.trans = view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0));
     Canvas img = render(camera, world);
     std::string ppm_string = canvas_to_ppm(img);
@@ -62,6 +64,7 @@ void draw_scene() {
 }
 
 
+#ifdef __EMSCRIPTEN__
 extern "C" void EMSCRIPTEN_KEEPALIVE first_scene_render_pixels(unsigned char* charPixels, std::size_t width, std::size_t height) {
     World world{default_world()};
     world.objects.clear();
@@ -103,6 +106,7 @@ extern "C" void EMSCRIPTEN_KEEPALIVE first_scene_render_pixels(unsigned char* ch
         color_i += 4;
     }
 }
+#endif
 
 int main() {
     draw_scene();

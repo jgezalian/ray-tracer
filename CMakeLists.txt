@@ -5,6 +5,7 @@ project(ray_tracer VERSION 1.0
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+set(MACOSX_DEPLOYMENT_TARGET 15.6)
 add_library(ray_tracer
   src/img/canvas.cpp
   src/math/matrix.cpp
@@ -45,8 +46,8 @@ add_executable(draw_circle apps/draw_circle.cpp)
 target_link_libraries(draw_circle PRIVATE ray_tracer)
 add_executable(draw_shaded_circle apps/draw_shaded_circle.cpp)
 target_link_libraries(draw_shaded_circle PRIVATE ray_tracer)
-# add_executable(first_scene apps/first_scene.cpp)
-# target_link_libraries(first_scene PRIVATE ray_tracer)
+add_executable(first_scene apps/first_scene.cpp)
+target_link_libraries(first_scene PRIVATE ray_tracer)
 
 
 include(FetchContent)
