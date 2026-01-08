@@ -29,7 +29,7 @@ TEST(Lighting, eye_between_light_and_surface) {
     const Material mat{};
     const Light light{point(0, 0, -10), Color{1, 1, 1}};
     const Tuple p{point(0, 0, 0)};
-    Color res = lighting(mat, light, p, eyev, normalv);
+    Color res = lighting(mat, light, p, eyev, normalv, false);
     color_eq(res, Color{1.9, 1.9, 1.9});
 }
 
@@ -39,7 +39,7 @@ TEST(Lighting, eye_between_light_and_surface_offset45) {
     const Material mat{};
     const Light light{point(0, 0, -10), Color{1, 1, 1}};
     const Tuple p{point(0, 0, 0)};
-    Color res = lighting(mat, light, p, eyev, normalv);
+    Color res = lighting(mat, light, p, eyev, normalv, false);
     color_eq(res, Color{1, 1, 1});
 }
 
@@ -50,7 +50,7 @@ TEST(Lighting, eye_opposite_surface_offset45) {
     const Material mat{};
     const Light light{point(0, 10, -10), Color{1, 1, 1}};
     const Tuple p{point(0, 0, 0)};
-    Color res = lighting(mat, light, p, eyev, normalv);
+    Color res = lighting(mat, light, p, eyev, normalv, false);
     color_eq(res, Color{0.7364, 0.7364, 0.7364});
 }
 
@@ -60,7 +60,7 @@ TEST(Lighting, eye_in_path_reflection_vector) {
     const Material mat{};
     const Light light{point(0, 10, -10), Color{1, 1, 1}};
     const Tuple p{point(0, 0, 0)};
-    Color res = lighting(mat, light, p, eyev, normalv);
+    Color res = lighting(mat, light, p, eyev, normalv, false);
     color_eq(res, Color{1.6364, 1.6364, 1.6364});
 }
 
@@ -70,10 +70,20 @@ TEST(Lighting, light_behind_surface) {
     const Material mat{};
     const Light light{point(0, 0, 10), Color{1, 1, 1}};
     const Tuple p{point(0, 0, 0)};
-    Color res = lighting(mat, light, p, eyev, normalv);
+    Color res = lighting(mat, light, p, eyev, normalv, true);
     color_eq(res, Color{0.1, 0.1, 0.1});
 }
 
+
+TEST(Lighting, lighting_with_surface_in_shadow) {
+    const Tuple eyev = vector(0, 0, -1);
+    const Tuple normalv = vector(0, 0, -1);
+    const Material mat{};
+    const Light light{point(0, 0, -10), Color{1, 1, 1}};
+    const Tuple p{point(0, 0, 0)};
+    Color res = lighting(mat, light, p, eyev, normalv, true);
+    color_eq(res, Color{0.1, 0.1, 0.1});
+}
 
 
 

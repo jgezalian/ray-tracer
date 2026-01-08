@@ -68,7 +68,7 @@ void draw_shaded_circle() {
                 Tuple point = ray.position(i->t);
                 Tuple normal = sphere->normal_at(point);
                 Tuple eyev = -ray.direction;
-                Color shade = lighting(sphere->material, light, point, eyev, normal);
+                Color shade = lighting(sphere->material, light, point, eyev, normal, false);
                 canvas.write_pixel(x, y, shade);
             }
         }

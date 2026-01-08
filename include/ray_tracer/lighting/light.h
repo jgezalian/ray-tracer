@@ -16,7 +16,8 @@ img::Color lighting(const Material& m,
                     const Light& light,
                     const math::Tuple& point,
                     const math::Tuple& eyev,
-                    const math::Tuple& normalv
+                    const math::Tuple& normalv,
+                    const bool in_shadow
                     );
 
 }  // namespace ray_tracer::lighting

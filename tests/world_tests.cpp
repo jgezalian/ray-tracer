@@ -14,6 +14,7 @@ using ray_tracer::helpers::Computation;
 using ray_tracer::helpers::prepare_computation;
 using ray_tracer::world::color_at;
 using ray_tracer::geometry::Shape;
+using ray_tracer::world::is_shadowed;
 
 
 TEST(world, constructor) {
@@ -85,4 +86,28 @@ TEST(world, behind_ray_color) {
     Ray ray(point(0, 0, 0.75), vector(0, 0, -1));
     Color c = color_at(world, ray);
     color_eq(c, inner->material.color);
+}
+
+TEST(world, no_shadow) {
+    World world{default_world()};
+    Tuple p{point(0, 10, 0)};
+    EXPECT_EQ(is_shadowed(p, world), 0);
+}
+
+TEST(world, shadow_between_obj){
+    World world{default_world()};
+    Tuple p{point(10, -10, 10)};
+    EXPECT_EQ(is_shadowed(p, world), 1);
+}
+
+TEST(world, no_shadow_behind_light){
+    World world{default_world()};
+    Tuple p{point(-20, 20, 20)};
+    EXPECT_EQ(is_shadowed(p, world), 0);
+}
+
+TEST(world, no_shadow_obj_behind_point){
+    World world{default_world()};
+    Tuple p{point(-2, 2, -2)};
+    EXPECT_EQ(is_shadowed(p, world), 0);
 }

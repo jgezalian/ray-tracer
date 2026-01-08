@@ -1,5 +1,6 @@
 #pragma once
 #include <ray_tracer/math/matrix.h>
+
 #include <cmath>
 #include <cstddef>
 
@@ -21,14 +22,21 @@ struct Camera {
     std::size_t hsize = 0;
     std::size_t vsize = 0;
     double field_of_view = 0;
+    double aspect = 0;
+    double half_view = 0;
+    double half_width = 0;
+    double half_height = 0;
+    double pixel_size = 0;
 
     math::Matrix trans = math::Matrix::identity(4);
 
     Camera(std::size_t hsize_, std::size_t vsize_, double field_of_view_);
-    double pixel_size() const;
+
     math::Ray ray_for_pixel(const std::size_t x, const std::size_t y) const;
+
+
 };
 
-img::Canvas render(const Camera &camera, const world::World &world) ;
+img::Canvas render(const Camera &camera, const world::World &world);
 
 }  // namespace ray_tracer::camera

@@ -5,6 +5,10 @@
 #include <ray_tracer/geometry/intersection.h>
 #include <ray_tracer/helpers/computation.h>
 
+namespace ray_tracer::helpers{
+    struct Computation;
+}
+
 namespace ray_tracer::world {
 
     struct World{   
@@ -24,5 +28,6 @@ namespace ray_tracer::world {
     ray_tracer::img::Color shade_hit(const World &world, const helpers::Computation &comps);
     std::vector<geometry::Intersection> intersect_world(const World &world, const math::Ray &ray);
     ray_tracer::img::Color color_at(const World &world, const math::Ray &ray);
+    bool is_shadowed(const math::Tuple &point, const world::World &world);
 
 }  // namespace ray_tracer::world

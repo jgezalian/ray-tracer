@@ -7,6 +7,9 @@ namespace ray_tracer::helpers {
     using geometry::Intersection;
     using math::Ray;
     using math::dot;
+    using math::print_tuple;
+
+    constexpr double eps = 1e-5;
 
     Computation prepare_computation(const Intersection &i, const Ray &r) {
         Computation comps;
@@ -20,6 +23,8 @@ namespace ray_tracer::helpers {
             comps.inside = true;
             comps.normalv = -comps.normalv;
         }
+
+        comps.over_point = comps.point + comps.normalv * eps;
         
         return comps;
     }

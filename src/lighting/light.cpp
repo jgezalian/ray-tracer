@@ -14,7 +14,7 @@ Light::Light(const Tuple &position, const Color &intensity)
     : position(position), intensity(intensity) {}
 
 Color lighting(const Material &m, const Light &light, const Tuple &point, const Tuple &eyev,
-               const Tuple &normalv) { 
+               const Tuple &normalv, bool in_shadow) { 
     Color black{0, 0, 0};
     Color diffuse;
     Color specular;
@@ -22,7 +22,7 @@ Color lighting(const Material &m, const Light &light, const Tuple &point, const 
     const Tuple lightv{norm(light.position - point)};
     const Color ambient = effective_color * m.ambient;
     const double light_dot_normal = dot(lightv, normalv);
-    if (light_dot_normal < 0) {
+    if (light_dot_normal < 0 || in_shadow == true) {
         diffuse = black;
         specular = black;
     } else {

@@ -28,12 +28,12 @@ TEST(camera, construct) {
 
 TEST(camera, pixel_size_horizontal) {
     Camera camera{200, 125, pi/2};
-    EXPECT_NEAR(camera.pixel_size(), 0.01, 1e-12);
+    EXPECT_NEAR(camera.pixel_size, 0.01, 1e-12);
 }
 
 TEST(camera, pixel_size_vertical) {
     Camera camera{125, 200, pi/2};
-    EXPECT_NEAR(camera.pixel_size(), 0.01, 1e-12);
+    EXPECT_NEAR(camera.pixel_size, 0.01, 1e-12);
 }
 
 TEST(camera, ray_through_center) {
