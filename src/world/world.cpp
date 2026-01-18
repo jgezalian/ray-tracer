@@ -59,7 +59,7 @@ std::vector<Intersection> intersect_world(const World &world, const Ray &ray) {
 
 Color shade_hit(const World &world, const helpers::Computation &comps) {
     bool in_shadow = is_shadowed(comps.over_point, world);
-    return lighting(comps.shape->material, world.light, comps.point, comps.eyev, comps.normalv,
+    return lighting(comps.shape, comps.shape->material, world.light, comps.point, comps.eyev, comps.normalv,
                     in_shadow);
 }
 

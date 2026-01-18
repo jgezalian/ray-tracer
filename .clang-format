@@ -8,7 +8,7 @@ Standard: c++17
 
 # Indentation
 IndentWidth: 4
-TabWidth: 2
+TabWidth: 4
 UseTab: Never
 ContinuationIndentWidth: 4
 
@@ -16,7 +16,8 @@ ContinuationIndentWidth: 4
 ColumnLimit: 100
 
 # Access modifiers
-AccessModifierOffset: -1
+AccessModifierOffset: 0
+IndentAccessModifiers: true
 
 # Alignment
 AlignAfterOpenBracket: Align
@@ -47,7 +48,6 @@ BreakBeforeInheritanceComma: false
 BreakInheritanceList: BeforeColon
 BreakBeforeTernaryOperators: true
 BreakConstructorInitializersBeforeComma: false
-BreakConstructorInitializers: BeforeColon
 BreakStringLiterals: true
 
 # Bin packing
@@ -58,7 +58,7 @@ BinPackParameters: true
 CommentPragmas: '^ IWYU pragma:'
 
 # Constructors
-CompactNamespaces: false
+BreakConstructorInitializers: AfterColon
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 ConstructorInitializerIndentWidth: 4
 

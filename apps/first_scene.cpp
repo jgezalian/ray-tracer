@@ -57,7 +57,7 @@ void draw_scene() {
     center_sphere->transform = translation(-0.5, 1, 0.5);
     world.objects.push_back(center_sphere);
 
-    Camera camera{1920, 1080, pi / 2};
+    Camera camera{3840, 2160, pi / 2};
     camera.trans = view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0));
     Canvas img = render(camera, world);
     std::string ppm_string = canvas_to_ppm(img);

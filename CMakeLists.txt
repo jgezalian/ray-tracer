@@ -12,11 +12,13 @@ add_library(ray_tracer
   src/math/transform.cpp 
   src/geometry/intersection.cpp
   src/geometry/sphere.cpp
+  src/geometry/plane.cpp
   src/math/ray.cpp
   src/math/tuple.cpp
   src/math/util.cpp
   src/lighting/light.cpp
   src/lighting/material.cpp
+  src/lighting/pattern.cpp
   src/world/world.cpp
   src/helpers/computation.cpp
   src/camera/camera.cpp
@@ -38,16 +40,20 @@ target_link_options(first_scene PRIVATE "-sMODULARIZE=1"
 
 else()
 message(STATUS "compiling without emscripten")
-add_executable(plot_projectile apps/plot_projectile.cpp)
-target_link_libraries(plot_projectile PRIVATE ray_tracer)
-add_executable(clock_face apps/clock_face.cpp)
-target_link_libraries(clock_face PRIVATE ray_tracer)
-add_executable(draw_circle apps/draw_circle.cpp)
-target_link_libraries(draw_circle PRIVATE ray_tracer)
-add_executable(draw_shaded_circle apps/draw_shaded_circle.cpp)
-target_link_libraries(draw_shaded_circle PRIVATE ray_tracer)
-add_executable(first_scene apps/first_scene.cpp)
-target_link_libraries(first_scene PRIVATE ray_tracer)
+# add_executable(plot_projectile apps/plot_projectile.cpp)
+# target_link_libraries(plot_projectile PRIVATE ray_tracer)
+# add_executable(clock_face apps/clock_face.cpp)
+# target_link_libraries(clock_face PRIVATE ray_tracer)
+# add_executable(draw_circle apps/draw_circle.cpp)
+# target_link_libraries(draw_circle PRIVATE ray_tracer)
+# add_executable(draw_shaded_circle apps/draw_shaded_circle.cpp)
+# target_link_libraries(draw_shaded_circle PRIVATE ray_tracer)
+# add_executable(first_scene apps/first_scene.cpp)
+# target_link_libraries(first_scene PRIVATE ray_tracer)
+add_executable(sphere_on_plane apps/sphere_on_plane.cpp)
+target_link_libraries(sphere_on_plane PRIVATE ray_tracer)
+add_executable(generated_scene apps/generated_scene.cpp)
+target_link_libraries(generated_scene PRIVATE ray_tracer)
 
 
 include(FetchContent)
@@ -86,7 +92,7 @@ target_link_libraries(misc_tests PRIVATE ray_tracer GTest::gtest_main)
 include(GoogleTest)         # helper macros
 gtest_discover_tests(misc_tests DISCOVERY_MODE PRE_TEST)  # auto-register tests with CTest
 
-foreach(t ray_tracer unit_tests plot_projectile misc_tests)
+foreach(t ray_tracer unit_tests)
     target_compile_options(${t} PRIVATE
     -Wall -Wextra -Wpedantic
     -Wconversion -Wdouble-promotion -Wfloat-conversion -Wsign-conversion

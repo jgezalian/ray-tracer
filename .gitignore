@@ -1,6 +1,4 @@
 # CMake
-/build_*/
-/build/
 /lib/
 /cmake-build-*/
 CMakeFiles

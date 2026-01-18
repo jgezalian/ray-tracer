@@ -74,8 +74,9 @@ TEST(Sphere, default_material) {
 
 TEST(Sphere, assign_material) {
     Sphere sphere;
-    Material mat{Material()};
+    Material mat{};
     mat.ambient = 1;
+    mat.pattern = new Stripe_Pattern;
     sphere.material = mat;
     color_eq(sphere.material.color, Color{1.0, 1.0, 1.0});
     EXPECT_NEAR(sphere.material.ambient, 1, 1e-12);

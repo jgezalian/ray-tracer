@@ -45,7 +45,7 @@ math::Ray Camera::ray_for_pixel(const std::size_t x, const std::size_t y) const 
     Tuple direction = norm(pixel - origin);
     return Ray{origin, direction};
 }
-
+ 
 Canvas render(const Camera &camera, const World &world) {
     Canvas image{camera.hsize, camera.vsize};
     for (std::size_t y = 0; y <= camera.vsize - 1; ++y) {

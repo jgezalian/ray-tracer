@@ -2,6 +2,7 @@
 #include <gtest/gtest.h>
 #include <ray_tracer/geometry/intersection.h>
 #include <ray_tracer/geometry/sphere.h>
+#include <ray_tracer/geometry/plane.h>
 #include <ray_tracer/img/canvas.h>
 #include <ray_tracer/img/color.h>
 #include <ray_tracer/math/matrix.h>
@@ -84,3 +85,4 @@ inline void light_eq(const Light l1, const Light l2) {
     tuple_eq(l1.position, l2.position);
     color_eq(l1.intensity, l2.intensity);
 }
+

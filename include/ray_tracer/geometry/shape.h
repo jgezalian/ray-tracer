@@ -2,12 +2,17 @@
 #include <ray_tracer/math/matrix.h>
 #include <ray_tracer/math/ray.h>
 #include <ray_tracer/lighting/material.h>
+#include <ray_tracer/geometry/intersection.h>
 
 namespace ray_tracer::geometry {
+
+struct Intersection;
 
 class Shape {
     protected:
         Shape() : id(next_id++), transform(math::Matrix::identity(4)) {};
+        virtual std::vector<Intersection> local_intersect(const math::Ray &ray) const = 0;
+        friend std::vector<Intersection> intersect(const Shape* shape, const math::Ray &ray);
     public:
         virtual ~Shape() {}
         std::size_t id;

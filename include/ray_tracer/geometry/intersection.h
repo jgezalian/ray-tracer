@@ -1,11 +1,12 @@
 #pragma once
 #include <vector>
 #include <ray_tracer/math/ray.h>
-#include <ray_tracer/geometry/shape.h>
 #include <initializer_list>
 
 
 namespace ray_tracer::geometry {
+
+class Shape;
 
 struct Intersection {
     double t;

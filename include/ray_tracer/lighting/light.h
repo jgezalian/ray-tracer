@@ -3,6 +3,10 @@
 #include <ray_tracer/math/tuple.h>
 #include <ray_tracer/lighting/material.h>
 
+namespace ray_tracer::geometry {
+    class Shape;
+}
+
 namespace ray_tracer::lighting {
 
 struct Light {
@@ -12,7 +16,8 @@ struct Light {
     Light(const math::Tuple& position, const img::Color& intensity);
 };
 
-img::Color lighting(const Material& m,
+img::Color lighting(const geometry::Shape* object,
+                    const Material& m,
                     const Light& light,
                     const math::Tuple& point,
                     const math::Tuple& eyev,
