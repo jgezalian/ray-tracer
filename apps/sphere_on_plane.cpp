@@ -59,7 +59,9 @@ void draw_scene() {
 }
 
 #ifdef __EMSCRIPTEN__
-extern "C" void EMSCRIPTEN_KEEPALIVE first_scene_render_pixels(unsigned char* charPixels, std::size_t width, std::size_t height) {
+extern "C" void EMSCRIPTEN_KEEPALIVE sphere_on_plane_render_pixels(unsigned char* charPixels,
+                                                               std::size_t width,
+                                                               std::size_t height) {
     World world{default_world()};
     for (auto* object : world.objects) {
         delete object;
@@ -84,11 +86,17 @@ extern "C" void EMSCRIPTEN_KEEPALIVE first_scene_render_pixels(unsigned char* ch
     center_sphere->transform = chain_transform({translation(0, 1, -1), scaling(3.3, 3.3, 3.3)});
     world.objects.push_back(center_sphere);
 
-    Camera camera{1920, 1080, pi / 1.2};
-    camera.trans = view_transform(point(0, 3, -10), point(0, 0, 0), vector(0, 1, 0));
+    Camera camera{width, height, pi / 2};
+    camera.trans = view_transform(point(0, 7, -12), point(0, 0, 0), vector(0, 1, 0));
     const Canvas img = render(camera, world);
-    std::string ppm_string = canvas_to_ppm(img);
-    ray_tracer::img::write_ppm(ppm_string, "plane_sphere");
+    int color_i = 0;
+    for (auto& color : img.pixels) {
+        charPixels[color_i] = std::fmin(255.0f, 255.0f * color.r);
+        charPixels[color_i + 1] = std::fmin(255.0f, 255.0f * color.g);
+        charPixels[color_i + 2] = std::fmin(255.0f, 255.0f * color.b);
+        charPixels[color_i + 3] = 255;
+        color_i += 4;
+    }
 }
 #endif
 

@@ -16,8 +16,8 @@ function render() {
   scene_canvas_test()
     .then((Module) => {
       sc_test = Module;
-      sc_test.first_scene_render_pixels = sc_test.cwrap(
-        "first_scene_render_pixels",
+      sc_test.sphere_on_plane_render_pixels = sc_test.cwrap(
+        "sphere_on_plane_render_pixels",
         null,
         ["number", "number", "number"]
       );
@@ -31,7 +31,7 @@ function render() {
       canvas.height = height;
       const canvas_context = canvas.getContext("2d");
 
-      sc_test.first_scene_render_pixels(pixel_arr.byteOffset, width, height);
+      sc_test.sphere_on_plane_render_pixels(pixel_arr.byteOffset, width, height);
       const image = new ImageData(new Uint8ClampedArray(pixel_arr), width);
       canvas_context.putImageData(image, 0, 0);
 

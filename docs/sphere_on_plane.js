@@ -553,7 +553,7 @@ function createExportWrapper(name, nargs) {
 var wasmBinaryFile;
 
 function findWasmBinary() {
-  return locateFile('first_scene.wasm');
+  return locateFile('sphere_on_plane.wasm');
 }
 
 function getBinarySync(file) {
@@ -4678,7 +4678,7 @@ function checkIncomingModuleAPI() {
 }
 
 // Imports from the Wasm binary.
-var _first_scene_render_pixels = Module['_first_scene_render_pixels'] = makeInvalidEarlyAccess('_first_scene_render_pixels');
+var _sphere_on_plane_render_pixels = Module['_sphere_on_plane_render_pixels'] = makeInvalidEarlyAccess('_sphere_on_plane_render_pixels');
 var _main = makeInvalidEarlyAccess('_main');
 var _fflush = makeInvalidEarlyAccess('_fflush');
 var _strerror = makeInvalidEarlyAccess('_strerror');
@@ -4695,8 +4695,8 @@ var __indirect_function_table = makeInvalidEarlyAccess('__indirect_function_tabl
 var wasmMemory = makeInvalidEarlyAccess('wasmMemory');
 
 function assignWasmExports(wasmExports) {
-  assert(typeof wasmExports['first_scene_render_pixels'] != 'undefined', 'missing Wasm export: first_scene_render_pixels');
-  _first_scene_render_pixels = Module['_first_scene_render_pixels'] = createExportWrapper('first_scene_render_pixels', 3);
+  assert(typeof wasmExports['sphere_on_plane_render_pixels'] != 'undefined', 'missing Wasm export: sphere_on_plane_render_pixels');
+  _sphere_on_plane_render_pixels = Module['_sphere_on_plane_render_pixels'] = createExportWrapper('sphere_on_plane_render_pixels', 3);
   assert(typeof wasmExports['main'] != 'undefined', 'missing Wasm export: main');
   _main = createExportWrapper('main', 2);
   assert(typeof wasmExports['fflush'] != 'undefined', 'missing Wasm export: fflush');

@@ -35,7 +35,7 @@ target_link_options(sphere_on_plane PRIVATE "-sMODULARIZE=1"
                                     "-sINITIAL_MEMORY=100007936"
                                     "-sEXPORT_NAME=scene_canvas_test"
                                     "-sEXPORTED_RUNTIME_METHODS=['cwrap', 'HEAPU8']"
-                                    "-sEXPORTED_FUNCTIONS=['_malloc','_first_scene_render_pixels']")
+                                    "-sEXPORTED_FUNCTIONS=['_malloc','_sphere_on_plane_render_pixels']")
 
 
 else()
