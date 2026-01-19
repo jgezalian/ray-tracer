@@ -1,16 +1,54 @@
+function attachIntegerInput(el, { min = 0, max = 4096 } = {}) {
+  el.addEventListener("input", () => {
+    // keep only digits
+    if (v === "") {
+      el.value = "";
+      return;
+    }
+    let n = parseInt(v, 10);
+    if (!Number.isFinite(n)) {
+      el.value = "";
+      return;
+    }
+    if (n < min) n = min;
+    if (n > max) n = max;
+    el.value = String(n);
+  });
+
+  el.addEventListener("blur", () => {
+    if (el.value === "") el.value = String(min);
+  });
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  attachIntegerInput(document.getElementById("width"),  { min: 1, max: 4096 });
+  attachIntegerInput(document.getElementById("height"), { min: 1, max: 4096 });
+});
+
+
 function render() {
   
   const heightInput = document.getElementById("height");
   const widthInput  = document.getElementById("width");
 
-  const height = Number(Math.round(heightInput.value));
-  const width  = Number(Math.round(widthInput.value));
+  const intPattern = /^[0-9]\d*$/;
+  const heightStr = heightInput.value.trim();
+  const widthStr  = widthInput.value.trim();
 
-  if (!(height >= 0 && width >= 0)) {
-    alert("invalid input")
+  if (!intPattern.test(heightStr) || !intPattern.test(widthStr)) {
+    alert("invalid input");
     return;
   }
 
+  const height = Number(heightStr);
+  const width  = Number(widthStr);
+
+  // optional hard cap
+  const MAX_PIXELS = 4096 * 4096;
+  if (height * width > MAX_PIXELS) {
+    alert("Resolution too large.");
+    return;
+  }
 
   let sc_test = null;
   let pixel_arr = null;
