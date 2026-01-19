@@ -1,10 +1,5 @@
 function attachIntegerInput(el, { min = 0, max = 4096 } = {}) {
   el.addEventListener("input", () => {
-    // keep only digits
-    if (v === "") {
-      el.value = "";
-      return;
-    }
     let n = parseInt(v, 10);
     if (!Number.isFinite(n)) {
       el.value = "";
