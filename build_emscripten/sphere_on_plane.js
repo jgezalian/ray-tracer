@@ -553,7 +553,7 @@ function createExportWrapper(name, nargs) {
 var wasmBinaryFile;
 
 function findWasmBinary() {
-  return locateFile('first_scene.wasm');
+  return locateFile('sphere_on_plane.wasm');
 }
 
 function getBinarySync(file) {

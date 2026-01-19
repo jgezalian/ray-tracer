@@ -92,3 +92,20 @@ TEST(Lighting, stripes_with_object_trans) {
     //point (1,1,1) -> (.5, .5, .5) after transformation, floor(0.5) == 0, 0 % 2 == 0, color[0] == black
     color_eq(sphere.material.pattern->pattern_at_object(&sphere, point(1, 1, 1)), Color(0, 0, 0));
 }
+
+TEST(Lighting, stripes_with_pattern_trans) {
+    Sphere sphere;
+    Stripe_Pattern* stripe_pattern = new Stripe_Pattern;
+    stripe_pattern->transform = scaling(2, 2, 2);
+    sphere.material.pattern = stripe_pattern;
+    color_eq(sphere.material.pattern->pattern_at_object(&sphere, point(1, 1, 1)), Color(0, 0, 0));
+}
+
+TEST(Lighting, stripes_with_pattern_and_obj_trans) {
+    Sphere sphere;
+    Stripe_Pattern* stripe_pattern = new Stripe_Pattern;
+    stripe_pattern->transform = scaling(0.5, 0.5, 0.5);
+    sphere.material.pattern = stripe_pattern;
+    sphere.transform = translation(-0.5, 0, 0);
+    color_eq(sphere.material.pattern->pattern_at_object(&sphere, point(1, 1, 1)), Color(1, 1, 1));
+}

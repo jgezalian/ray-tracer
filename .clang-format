@@ -13,7 +13,7 @@ UseTab: Never
 ContinuationIndentWidth: 4
 
 # Line length
-ColumnLimit: 100
+ColumnLimit: 150
 
 # Access modifiers
 AccessModifierOffset: 0

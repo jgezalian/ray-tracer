@@ -137,41 +137,41 @@ ray_tracer/fast:
 .PHONY : ray_tracer/fast
 
 #=============================================================================
-# Target rules for targets named first_scene
+# Target rules for targets named sphere_on_plane
 
 # Build rule for target.
-first_scene: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 first_scene
-.PHONY : first_scene
+sphere_on_plane: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sphere_on_plane
+.PHONY : sphere_on_plane
 
 # fast build rule for target.
-first_scene/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/first_scene.dir/build.make CMakeFiles/first_scene.dir/build
-.PHONY : first_scene/fast
+sphere_on_plane/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sphere_on_plane.dir/build.make CMakeFiles/sphere_on_plane.dir/build
+.PHONY : sphere_on_plane/fast
 
-apps/first_scene.o: apps/first_scene.cpp.o
-.PHONY : apps/first_scene.o
+apps/sphere_on_plane.o: apps/sphere_on_plane.cpp.o
+.PHONY : apps/sphere_on_plane.o
 
 # target to build an object file
-apps/first_scene.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/first_scene.dir/build.make CMakeFiles/first_scene.dir/apps/first_scene.cpp.o
-.PHONY : apps/first_scene.cpp.o
+apps/sphere_on_plane.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sphere_on_plane.dir/build.make CMakeFiles/sphere_on_plane.dir/apps/sphere_on_plane.cpp.o
+.PHONY : apps/sphere_on_plane.cpp.o
 
-apps/first_scene.i: apps/first_scene.cpp.i
-.PHONY : apps/first_scene.i
+apps/sphere_on_plane.i: apps/sphere_on_plane.cpp.i
+.PHONY : apps/sphere_on_plane.i
 
 # target to preprocess a source file
-apps/first_scene.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/first_scene.dir/build.make CMakeFiles/first_scene.dir/apps/first_scene.cpp.i
-.PHONY : apps/first_scene.cpp.i
+apps/sphere_on_plane.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sphere_on_plane.dir/build.make CMakeFiles/sphere_on_plane.dir/apps/sphere_on_plane.cpp.i
+.PHONY : apps/sphere_on_plane.cpp.i
 
-apps/first_scene.s: apps/first_scene.cpp.s
-.PHONY : apps/first_scene.s
+apps/sphere_on_plane.s: apps/sphere_on_plane.cpp.s
+.PHONY : apps/sphere_on_plane.s
 
 # target to generate assembly for a file
-apps/first_scene.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/first_scene.dir/build.make CMakeFiles/first_scene.dir/apps/first_scene.cpp.s
-.PHONY : apps/first_scene.cpp.s
+apps/sphere_on_plane.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sphere_on_plane.dir/build.make CMakeFiles/sphere_on_plane.dir/apps/sphere_on_plane.cpp.s
+.PHONY : apps/sphere_on_plane.cpp.s
 
 src/camera/camera.o: src/camera/camera.cpp.o
 .PHONY : src/camera/camera.o
@@ -220,6 +220,30 @@ src/geometry/intersection.s: src/geometry/intersection.cpp.s
 src/geometry/intersection.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ray_tracer.dir/build.make CMakeFiles/ray_tracer.dir/src/geometry/intersection.cpp.s
 .PHONY : src/geometry/intersection.cpp.s
+
+src/geometry/plane.o: src/geometry/plane.cpp.o
+.PHONY : src/geometry/plane.o
+
+# target to build an object file
+src/geometry/plane.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ray_tracer.dir/build.make CMakeFiles/ray_tracer.dir/src/geometry/plane.cpp.o
+.PHONY : src/geometry/plane.cpp.o
+
+src/geometry/plane.i: src/geometry/plane.cpp.i
+.PHONY : src/geometry/plane.i
+
+# target to preprocess a source file
+src/geometry/plane.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ray_tracer.dir/build.make CMakeFiles/ray_tracer.dir/src/geometry/plane.cpp.i
+.PHONY : src/geometry/plane.cpp.i
+
+src/geometry/plane.s: src/geometry/plane.cpp.s
+.PHONY : src/geometry/plane.s
+
+# target to generate assembly for a file
+src/geometry/plane.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ray_tracer.dir/build.make CMakeFiles/ray_tracer.dir/src/geometry/plane.cpp.s
+.PHONY : src/geometry/plane.cpp.s
 
 src/geometry/sphere.o: src/geometry/sphere.cpp.o
 .PHONY : src/geometry/sphere.o
@@ -340,6 +364,30 @@ src/lighting/material.s: src/lighting/material.cpp.s
 src/lighting/material.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ray_tracer.dir/build.make CMakeFiles/ray_tracer.dir/src/lighting/material.cpp.s
 .PHONY : src/lighting/material.cpp.s
+
+src/lighting/pattern.o: src/lighting/pattern.cpp.o
+.PHONY : src/lighting/pattern.o
+
+# target to build an object file
+src/lighting/pattern.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ray_tracer.dir/build.make CMakeFiles/ray_tracer.dir/src/lighting/pattern.cpp.o
+.PHONY : src/lighting/pattern.cpp.o
+
+src/lighting/pattern.i: src/lighting/pattern.cpp.i
+.PHONY : src/lighting/pattern.i
+
+# target to preprocess a source file
+src/lighting/pattern.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ray_tracer.dir/build.make CMakeFiles/ray_tracer.dir/src/lighting/pattern.cpp.i
+.PHONY : src/lighting/pattern.cpp.i
+
+src/lighting/pattern.s: src/lighting/pattern.cpp.s
+.PHONY : src/lighting/pattern.s
+
+# target to generate assembly for a file
+src/lighting/pattern.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ray_tracer.dir/build.make CMakeFiles/ray_tracer.dir/src/lighting/pattern.cpp.s
+.PHONY : src/lighting/pattern.cpp.s
 
 src/math/matrix.o: src/math/matrix.cpp.o
 .PHONY : src/math/matrix.o
@@ -494,17 +542,20 @@ help:
 	@echo "... codegen"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... first_scene"
 	@echo "... ray_tracer"
-	@echo "... apps/first_scene.o"
-	@echo "... apps/first_scene.i"
-	@echo "... apps/first_scene.s"
+	@echo "... sphere_on_plane"
+	@echo "... apps/sphere_on_plane.o"
+	@echo "... apps/sphere_on_plane.i"
+	@echo "... apps/sphere_on_plane.s"
 	@echo "... src/camera/camera.o"
 	@echo "... src/camera/camera.i"
 	@echo "... src/camera/camera.s"
 	@echo "... src/geometry/intersection.o"
 	@echo "... src/geometry/intersection.i"
 	@echo "... src/geometry/intersection.s"
+	@echo "... src/geometry/plane.o"
+	@echo "... src/geometry/plane.i"
+	@echo "... src/geometry/plane.s"
 	@echo "... src/geometry/sphere.o"
 	@echo "... src/geometry/sphere.i"
 	@echo "... src/geometry/sphere.s"
@@ -520,6 +571,9 @@ help:
 	@echo "... src/lighting/material.o"
 	@echo "... src/lighting/material.i"
 	@echo "... src/lighting/material.s"
+	@echo "... src/lighting/pattern.o"
+	@echo "... src/lighting/pattern.i"
+	@echo "... src/lighting/pattern.s"
 	@echo "... src/math/matrix.o"
 	@echo "... src/math/matrix.i"
 	@echo "... src/math/matrix.s"

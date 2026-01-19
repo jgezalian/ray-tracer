@@ -43,6 +43,24 @@ struct Stripe_Pattern : public Pattern {
 
 struct Gradient_Pattern : public Pattern {
         Gradient_Pattern() : Pattern() {}
+
+        Gradient_Pattern(std::initializer_list<img::Color> _colors) : Pattern(_colors) {} 
+
+        img::Color pattern_at_object(const geometry::Shape* object,
+                                     const math::Tuple& world_point) override;
+
+        Pattern* clone() const override { return new Gradient_Pattern(*this); }
+};
+
+struct Checkered_Pattern : public Pattern {
+        Checkered_Pattern() : Pattern() {}
+
+        Checkered_Pattern(std::initializer_list<img::Color> _colors) : Pattern(_colors) {} 
+
+        img::Color pattern_at_object(const geometry::Shape* object,
+                                     const math::Tuple& world_point) override;
+
+        Pattern* clone() const override { return new Checkered_Pattern(*this); }
 };
 
 }  // namespace ray_tracer::lighting

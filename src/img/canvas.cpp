@@ -1,5 +1,4 @@
 #include <ray_tracer/img/canvas.h>
-
 #include <algorithm>
 #include <cassert>
 #include <cmath>

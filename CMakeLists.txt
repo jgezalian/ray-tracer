@@ -27,11 +27,11 @@ target_include_directories(ray_tracer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 
 if(EMSCRIPTEN)
 message(STATUS "compiling with emscripten")
-add_executable(first_scene apps/first_scene.cpp)
-target_link_libraries(first_scene PRIVATE ray_tracer)
+add_executable(sphere_on_plane apps/sphere_on_plane.cpp)
+target_link_libraries(sphere_on_plane PRIVATE ray_tracer)
 
 target_compile_options(ray_tracer PRIVATE -O2)
-target_link_options(first_scene PRIVATE "-sMODULARIZE=1"
+target_link_options(sphere_on_plane PRIVATE "-sMODULARIZE=1"
                                     "-sINITIAL_MEMORY=100007936"
                                     "-sEXPORT_NAME=scene_canvas_test"
                                     "-sEXPORTED_RUNTIME_METHODS=['cwrap', 'HEAPU8']"
@@ -40,20 +40,9 @@ target_link_options(first_scene PRIVATE "-sMODULARIZE=1"
 
 else()
 message(STATUS "compiling without emscripten")
-# add_executable(plot_projectile apps/plot_projectile.cpp)
-# target_link_libraries(plot_projectile PRIVATE ray_tracer)
-# add_executable(clock_face apps/clock_face.cpp)
-# target_link_libraries(clock_face PRIVATE ray_tracer)
-# add_executable(draw_circle apps/draw_circle.cpp)
-# target_link_libraries(draw_circle PRIVATE ray_tracer)
-# add_executable(draw_shaded_circle apps/draw_shaded_circle.cpp)
-# target_link_libraries(draw_shaded_circle PRIVATE ray_tracer)
-# add_executable(first_scene apps/first_scene.cpp)
-# target_link_libraries(first_scene PRIVATE ray_tracer)
+
 add_executable(sphere_on_plane apps/sphere_on_plane.cpp)
 target_link_libraries(sphere_on_plane PRIVATE ray_tracer)
-add_executable(generated_scene apps/generated_scene.cpp)
-target_link_libraries(generated_scene PRIVATE ray_tracer)
 
 
 include(FetchContent)
