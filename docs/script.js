@@ -1,9 +1,17 @@
 function render() {
+  
   const heightInput = document.getElementById("height");
   const widthInput  = document.getElementById("width");
 
-  const height = Number(heightInput.value);
-  const width  = Number(widthInput.value);
+  const height = Number(Math.round(heightInput.value));
+  const width  = Number(Math.round(widthInput.value));
+
+  if (!(height >= 0 && width >= 0)) {
+    alert("invalid input")
+    return;
+  }
+
+
   let sc_test = null;
   let pixel_arr = null;
 
