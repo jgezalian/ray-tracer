@@ -178,7 +178,7 @@ TEST(Transform, view_transform_default) {
     Tuple to{point(0, 0, -1)};
     Tuple up{vector(0, 1, 0)};
     Matrix t = view_transform(from, to, up);
-    expect_matrix_eq(t, Matrix::identity(4));
+    expect_matrix_eq(t, identity(4));
 }
 
 TEST(Transform, view_transform_pos_z) {

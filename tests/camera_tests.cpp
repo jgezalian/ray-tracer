@@ -3,6 +3,7 @@
 #include <iostream>
 
 using namespace ray_tracer::camera;
+using ray_tracer::math::identity;
 using ray_tracer::math::Matrix;
 using ray_tracer::camera::Camera;
 using ray_tracer::math::Ray;
@@ -23,7 +24,7 @@ TEST(camera, construct) {
     EXPECT_NEAR(camera.hsize, 160, 1e-12);
     EXPECT_NEAR(camera.vsize, 120, 1e-12);
     EXPECT_NEAR(camera.field_of_view, pi/2, 1e-12);
-    expect_matrix_eq(camera.trans, Matrix::Matrix::identity(4));
+    expect_matrix_eq(camera.get_transform(), identity(4));
 }
 
 TEST(camera, pixel_size_horizontal) {
@@ -53,7 +54,7 @@ TEST(camera, ray_through_corner) {
 TEST(camera, ray_camera_transformed) {
     Camera camera{201, 101, pi/2};
     Ray ray{camera.ray_for_pixel(0, 0)};
-    camera.trans = rotate_y(pi/4) * translation(0, -2, 5);
+    camera.set_transform(rotate_y(pi/4) * translation(0, -2, 5));
     tuple_eq(ray.origin, point(0, 0, 0));
     tuple_eq(ray.direction, vector(0.66519, 0.33259, -0.66851));
 }
@@ -64,7 +65,7 @@ TEST(camera, render) {
     Tuple from{point(0, 0, -5)};
     Tuple to{point(0, 0, 0)};
     Tuple up{vector(0, 1, 0)};
-    camera.trans = view_transform(from, to, up);
+    camera.set_transform(view_transform(from, to, up));
     Canvas img = render(camera, world);
     color_eq(img.pixel_at(5, 5), Color(0.38066, 0.47583, 0.2855));
 }

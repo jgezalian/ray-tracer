@@ -22,7 +22,8 @@ TEST(Ray, position) {
 TEST(Ray, intersect_sphere_two_points) {
     Ray ray{point(0, 0, -5), vector(0, 0, 1)};
     const Sphere sphere;
-    std::vector<Intersection> xs = intersect(&sphere, ray);
+    std::vector<Intersection> xs;
+    sphere.intersect(ray, xs);
     EXPECT_EQ(xs.size(), 2);
     //EXPECT_EQ(xs[0].shape->id, 0);
     EXPECT_NEAR(xs[1].t, 6.0, 1e-12);
@@ -31,7 +32,8 @@ TEST(Ray, intersect_sphere_two_points) {
 TEST(Ray, intersect_sphere_tangent) {
     Ray ray{point(0, 1, -5), vector(0, 0, 1)};
     const Sphere sphere;
-    std::vector<Intersection> xs = intersect(&sphere, ray);
+    std::vector<Intersection> xs;
+    sphere.intersect(ray, xs);
     EXPECT_EQ(xs.size(), 2);
     //EXPECT_EQ(xs[0].shape->id, 1);
     EXPECT_NEAR(xs[0].t, 5.0, 1e-12);
@@ -41,14 +43,16 @@ TEST(Ray, intersect_sphere_tangent) {
 TEST(Ray, intersect_sphere_miss) {
     Ray ray{point(0, 2, -5), vector(0, 0, 1)};
     const Sphere sphere;
-    std::vector<Intersection> xs = intersect(&sphere, ray);
+    std::vector<Intersection> xs;
+    sphere.intersect(ray, xs);
     EXPECT_EQ(xs.size(), 0);
 }
 
 TEST(Ray, intersect_inside_sphere) {
     Ray ray{point(0, 0, 0), vector(0, 0, 1)};
     const Sphere sphere;
-    std::vector<Intersection> xs = intersect(&sphere, ray);
+    std::vector<Intersection> xs;
+    sphere.intersect(ray, xs);
     EXPECT_EQ(xs.size(), 2);
     //EXPECT_EQ(xs[0].shape->id, 3);
     EXPECT_NEAR(xs[0].t, -1.0, 1e-12);
@@ -58,7 +62,8 @@ TEST(Ray, intersect_inside_sphere) {
 TEST(Ray, intersect_sphere_behind_ray) {
     Ray ray{point(0, 0, 5), vector(0, 0, 1)};
     const Sphere sphere;
-    std::vector<Intersection> xs = intersect(&sphere, ray);
+    std::vector<Intersection> xs;
+    sphere.intersect(ray, xs);
     //EXPECT_EQ(xs[0].shape->id, 4);
     EXPECT_EQ(xs.size(), 2);
     EXPECT_NEAR(xs[0].t, -6.0, 1e-12);

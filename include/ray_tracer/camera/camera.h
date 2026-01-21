@@ -19,20 +19,35 @@ struct World;
 namespace ray_tracer::camera {
 
 struct Camera {
-    std::size_t hsize = 0;
-    std::size_t vsize = 0;
-    double field_of_view = 0;
-    double aspect = 0;
-    double half_view = 0;
-    double half_width = 0;
-    double half_height = 0;
-    double pixel_size = 0;
+        std::size_t hsize = 0;
+        std::size_t vsize = 0;
+        double field_of_view = 0;
+        double aspect = 0;
+        double half_view = 0;
+        double half_width = 0;
+        double half_height = 0;
+        double pixel_size = 0;
 
-    math::Matrix trans = math::Matrix::identity(4);
+        Camera(std::size_t hsize_, std::size_t vsize_, double field_of_view_);
 
-    Camera(std::size_t hsize_, std::size_t vsize_, double field_of_view_);
+        math::Ray ray_for_pixel(const std::size_t x, const std::size_t y) const;
 
-    math::Ray ray_for_pixel(const std::size_t x, const std::size_t y) const;
+        void set_transform(const math::Matrix &trans_) {
+            trans = trans_;
+            inverse_trans = math::inverse(trans_);
+        }
+
+        const math::Matrix& get_transform() const {
+            return trans;
+        }
+
+        const math::Matrix& get_inverse_transform() const {
+            return inverse_trans;
+        }
+
+        private:
+            math::Matrix trans = math::identity(4);
+            math::Matrix inverse_trans = math::inverse(trans);
 
 
 };

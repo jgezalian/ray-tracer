@@ -15,17 +15,18 @@ constexpr double eps = 1e-5;
 
 Tuple Plane::normal_at(const Tuple& /*world_point*/) const {
     const Tuple object_normal = vector(0, 1, 0); // constant in object space
-    Tuple world_normal = inverse(transform).transpose() * object_normal;
+    Tuple world_normal = get_inverse_transform().transpose() * object_normal;
     world_normal.w = 0;
     return norm(world_normal);
 }
 
-std::vector<Intersection> Plane::local_intersect(const math::Ray &ray) const {
+void Plane::local_intersect(const math::Ray &ray, std::vector<Intersection>& world_intersections) const {
     if(std::abs(ray.direction.y) < eps) {
-        return {};
+        return;
     }
-    return {Intersection(-(ray.origin.y/ray.direction.y), this)};
+    world_intersections.emplace_back(-(ray.origin.y/ray.direction.y), this);
     
 }
+
 
 }  // namespace ray_tracer::geometry

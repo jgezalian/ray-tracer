@@ -22,7 +22,7 @@ TEST(Matrix, multiplication) {
 
 TEST(Matrix, identity) {
     const Matrix m(2, 2, {0.0, 1.0, 2.0, 3.0});
-    const Matrix I = Matrix::identity(2);
+    const Matrix I = identity(2);
     expect_matrix(m * I, {0.0, 1.0, 2.0, 3.0});
 }
 

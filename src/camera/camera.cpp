@@ -20,7 +20,7 @@ using math::Tuple;
 using world::color_at;
 using world::World;
 
-constexpr double pi = 3.14159265358979323846;
+[[maybe_unused]] constexpr double pi = 3.14159265358979323846;
 
 Camera::Camera(std::size_t hsize_, std::size_t vsize_, double field_of_view_)
     : hsize(hsize_),
@@ -40,8 +40,8 @@ math::Ray Camera::ray_for_pixel(const std::size_t x, const std::size_t y) const 
     double yoffset = (y + 0.5) * pixel_size;
     double world_x = half_width - xoffset;
     double world_y = half_height - yoffset;
-    Tuple pixel = inverse(trans) * point(world_x, world_y, -1);
-    Tuple origin = inverse(trans) * point(0, 0, 0);
+    Tuple pixel = get_inverse_transform() * point(world_x, world_y, -1);
+    Tuple origin = get_inverse_transform() * point(0, 0, 0);
     Tuple direction = norm(pixel - origin);
     return Ray{origin, direction};
 }

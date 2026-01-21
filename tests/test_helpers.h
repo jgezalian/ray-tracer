@@ -1,30 +1,29 @@
 #pragma once
 #include <gtest/gtest.h>
+#include <ray_tracer/camera/camera.h>
 #include <ray_tracer/geometry/intersection.h>
-#include <ray_tracer/geometry/sphere.h>
 #include <ray_tracer/geometry/plane.h>
+#include <ray_tracer/geometry/sphere.h>
+#include <ray_tracer/helpers/computation.h>
 #include <ray_tracer/img/canvas.h>
 #include <ray_tracer/img/color.h>
+#include <ray_tracer/lighting/light.h>
+#include <ray_tracer/lighting/material.h>
 #include <ray_tracer/math/matrix.h>
 #include <ray_tracer/math/ray.h>
 #include <ray_tracer/math/transform.h>
 #include <ray_tracer/math/tuple.h>
-#include <ray_tracer/geometry/intersection.h>
-#include <ray_tracer/geometry/sphere.h>
-#include <ray_tracer/lighting/light.h>
-#include <ray_tracer/lighting/material.h>
 #include <ray_tracer/world/world.h>
-#include <ray_tracer/helpers/computation.h>
-#include <ray_tracer/camera/camera.h>
+
 #include <vector>
 
-//i should get refactor these global using qualifiers to function scope at some point
-using ray_tracer::img::Color;
-using ray_tracer::math::Matrix;
-using ray_tracer::math::Tuple;
+// i should get refactor these global using qualifiers to function scope at some point
 using ray_tracer::geometry::Intersection;
 using ray_tracer::geometry::Sphere;
+using ray_tracer::img::Color;
 using ray_tracer::lighting::Light;
+using ray_tracer::math::Matrix;
+using ray_tracer::math::Tuple;
 
 inline void expect_rgb(const Color& c, const double r, const double g, const double b,
                        const double eps = 1e-12) {
@@ -85,4 +84,3 @@ inline void light_eq(const Light l1, const Light l2) {
     tuple_eq(l1.position, l2.position);
     color_eq(l1.intensity, l2.intensity);
 }
-

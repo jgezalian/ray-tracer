@@ -3,7 +3,7 @@
 namespace ray_tracer::math {
     
 Matrix translation(double x, double y, double z) {
-    Matrix trans(Matrix::identity(4));
+    Matrix trans(identity(4));
     trans(0, 3, x);
     trans(1, 3, y);
     trans(2, 3, z);
@@ -12,7 +12,7 @@ Matrix translation(double x, double y, double z) {
 }
 
 Matrix scaling(double x, double y, double z) {
-    Matrix scale(Matrix::identity(4));
+    Matrix scale(identity(4));
     scale(0, 0, x);
     scale(1, 1, y);
     scale(2, 2, z);
@@ -21,7 +21,7 @@ Matrix scaling(double x, double y, double z) {
 }
 
 Matrix rotate_x(double r) {
-    Matrix rot_x(Matrix::identity(4));
+    Matrix rot_x(identity(4));
     rot_x(1, 1, std::cos(r));
     rot_x(1, 2, -1 * std::sin(r));
     rot_x(2, 1, std::sin(r));
@@ -31,7 +31,7 @@ Matrix rotate_x(double r) {
 }
 
 Matrix rotate_y(double r) {
-    Matrix rot_y(Matrix::identity(4));
+    Matrix rot_y(identity(4));
     rot_y(0, 0, std::cos(r));
     rot_y(0, 2, std::sin(r));
     rot_y(2, 0, -1 * std::sin(r));
@@ -41,7 +41,7 @@ Matrix rotate_y(double r) {
 }
 
 Matrix rotate_z(double r) {
-    Matrix rot_z(Matrix::identity(4));
+    Matrix rot_z(identity(4));
     rot_z(0, 0, std::cos(r));
     rot_z(0, 1, -1 * std::sin(r));
     rot_z(1, 0, std::sin(r));
@@ -51,7 +51,7 @@ Matrix rotate_z(double r) {
 }
 
 Matrix shearing(double x_y, double x_z, double y_x, double y_z, double z_x, double z_y) {
-    Matrix shear(Matrix::identity(4));
+    Matrix shear(identity(4));
     shear(0, 1, x_y);
     shear(0, 2, x_z);
     shear(1, 0, y_x);
@@ -63,7 +63,7 @@ Matrix shearing(double x_y, double x_z, double y_x, double y_z, double z_x, doub
 }
 
 Matrix chain_transform(std::vector<Matrix> trans_matrices) {
-    Matrix matrix_chain(Matrix::identity(4));
+    Matrix matrix_chain(identity(4));
     for(auto it = trans_matrices.rbegin(); it != trans_matrices.rend(); ++it) {
         matrix_chain = matrix_chain * *it;
     }
@@ -76,7 +76,7 @@ Matrix tuple_to_mat(const Tuple &t) {
 }
 
 Matrix view_transform(const Tuple &from, const Tuple &to, const Tuple &up) {
-    Matrix orientation(Matrix::identity(4));
+    Matrix orientation(identity(4));
     const Tuple forward = norm(to - from);
     const Tuple left = cross(forward, norm(up));
     const Tuple true_up = cross(left, forward);

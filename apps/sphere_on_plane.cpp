@@ -27,6 +27,7 @@ using namespace ray_tracer::math;
 using namespace ray_tracer::lighting;
 
 void draw_scene() {
+    
     World world{default_world()};
     for (auto* object : world.objects) {
         delete object;
@@ -37,31 +38,37 @@ void draw_scene() {
 
     // floor
     Plane* floor = new Plane();
-    floor->transform = translation(0, -5, 0);
+    floor->set_transform(translation(0, -5, 0));
     Checkered_Pattern* cp = new Checkered_Pattern;
-    cp->transform = scaling(4, 1, 4);  // bigger checkers on the plane
+    cp->set_transform(scaling(4, 1, 4));  // bigger checkers on the plane
     floor->material.pattern = cp;
     world.objects.push_back(floor);
+
+    // wall
+    // Plane* floor = new Plane();
+    // floor->set_transform(chain_transform({rotate_x(pi / 2), translation(0, 0, 0)}));
+    // Checkered_Pattern* cp = new Checkered_Pattern;
+    // cp->set_transform(scaling(4, 1, 4));  // bigger checkers on the plane
+    // floor->material.pattern = cp;
+    // world.objects.push_back(floor);
 
     // center sphere
     Sphere* center_sphere = new Sphere();
     Gradient_Pattern* gradient_pattern_center_sphere = new Gradient_Pattern({Color(0, 1, 0), Color(0, 0, 1.0)});
-    gradient_pattern_center_sphere->transform = chain_transform({scaling(2, 2, 2), translation(-1, 0, 0)});
+    gradient_pattern_center_sphere->set_transform(chain_transform({scaling(2, 2, 2), translation(-1, 0, 0)}));
     center_sphere->material.pattern = gradient_pattern_center_sphere;
-    center_sphere->transform = chain_transform({translation(0, 1, -1), scaling(3.3, 3.3, 3.3)});
+    center_sphere->set_transform(chain_transform({translation(0, 1, -1), scaling(3.3, 3.3, 3.3)}));
     world.objects.push_back(center_sphere);
 
-    Camera camera{1920, 1080, pi / 2};
-    camera.trans = view_transform(point(0, 7, -12), point(0, 0, 0), vector(0, 1, 0));
+    Camera camera{100, 1000, pi / 2};
+    camera.set_transform(view_transform(point(0, 7, -12), point(0, 0, 0), vector(0, 1, 0)));
     const Canvas img = render(camera, world);
     std::string ppm_string = canvas_to_ppm(img);
     ray_tracer::img::write_ppm(ppm_string, "plane_sphere");
 }
 
 #ifdef __EMSCRIPTEN__
-extern "C" void EMSCRIPTEN_KEEPALIVE sphere_on_plane_render_pixels(unsigned char* charPixels,
-                                                               std::size_t width,
-                                                               std::size_t height) {
+extern "C" void EMSCRIPTEN_KEEPALIVE sphere_on_plane_render_pixels(unsigned char* charPixels, std::size_t width, std::size_t height) {
     World world{default_world()};
     for (auto* object : world.objects) {
         delete object;
@@ -74,20 +81,20 @@ extern "C" void EMSCRIPTEN_KEEPALIVE sphere_on_plane_render_pixels(unsigned char
     Plane* floor = new Plane();
     floor->transform = translation(0, -5, 0);
     Checkered_Pattern* cp = new Checkered_Pattern;
-    cp->transform = scaling(4, 1, 4);  // bigger checkers on the plane
+    cp->set_transform(scaling(4, 1, 4));  // bigger checkers on the plane
     floor->material.pattern = cp;
     world.objects.push_back(floor);
 
     // center sphere
     Sphere* center_sphere = new Sphere();
     Gradient_Pattern* gradient_pattern_center_sphere = new Gradient_Pattern({Color(0, 1, 0), Color(0, 0, 1.0)});
-    gradient_pattern_center_sphere->transform = chain_transform({scaling(2, 2, 2), translation(-1, 0, 0)});
+    gradient_pattern_center_sphere->set_transform(chain_transform({scaling(2, 2, 2), translation(-1, 0, 0)}));
     center_sphere->material.pattern = gradient_pattern_center_sphere;
-    center_sphere->transform = chain_transform({translation(0, 1, -1), scaling(3.3, 3.3, 3.3)});
+    center_sphere->set_transform(chain_transform({translation(0, 1, -1), scaling(3.3, 3.3, 3.3)}));
     world.objects.push_back(center_sphere);
 
     Camera camera{width, height, pi / 2};
-    camera.trans = view_transform(point(0, 7, -12), point(0, 0, 0), vector(0, 1, 0));
+    camera.set_transform(view_transform(point(0, 7, -12), point(0, 0, 0), vector(0, 1, 0)));
     const Canvas img = render(camera, world);
     int color_i = 0;
     for (auto& color : img.pixels) {

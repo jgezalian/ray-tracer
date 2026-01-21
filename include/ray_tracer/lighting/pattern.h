@@ -15,19 +15,29 @@ namespace ray_tracer::lighting {
 class Pattern {
     protected:
         Pattern() :
-            transform(math::Matrix::identity(4)),
-            colors{img::Color(0, 0, 0), img::Color(1, 1, 1)} {}
+            colors{img::Color(0, 0, 0), img::Color(1, 1, 1)},
+            transform(math::identity(4)),
+            inverse_transform(math::inverse(transform)) {}
         Pattern(std::initializer_list<img::Color> _colors) :
-            transform(math::Matrix::identity(4)), colors(_colors) {}
+            colors(_colors), transform(math::identity(4)) {}
 
     public:
+        std::vector<img::Color> colors = {};
         virtual ~Pattern() {}
         virtual Pattern* clone() const = 0;
-        math::Matrix transform;
-        std::vector<img::Color> colors = {};
         void add_colors(std::initializer_list<img::Color> color_list);
         virtual img::Color pattern_at_object(const geometry::Shape* object,
                                              const math::Tuple& world_point) = 0;
+        math::Matrix get_transform() { return transform; };
+        math::Matrix get_inverse_transform() { return inverse_transform; };
+        void set_transform(const math::Matrix& mat) {
+            transform = mat;
+            inverse_transform = math::inverse(mat);
+        }
+
+    private:
+        math::Matrix transform = math::identity(4);
+        math::Matrix inverse_transform = math::inverse(transform);
 };
 
 struct Stripe_Pattern : public Pattern {
@@ -44,7 +54,7 @@ struct Stripe_Pattern : public Pattern {
 struct Gradient_Pattern : public Pattern {
         Gradient_Pattern() : Pattern() {}
 
-        Gradient_Pattern(std::initializer_list<img::Color> _colors) : Pattern(_colors) {} 
+        Gradient_Pattern(std::initializer_list<img::Color> _colors) : Pattern(_colors) {}
 
         img::Color pattern_at_object(const geometry::Shape* object,
                                      const math::Tuple& world_point) override;
@@ -55,7 +65,7 @@ struct Gradient_Pattern : public Pattern {
 struct Checkered_Pattern : public Pattern {
         Checkered_Pattern() : Pattern() {}
 
-        Checkered_Pattern(std::initializer_list<img::Color> _colors) : Pattern(_colors) {} 
+        Checkered_Pattern(std::initializer_list<img::Color> _colors) : Pattern(_colors) {}
 
         img::Color pattern_at_object(const geometry::Shape* object,
                                      const math::Tuple& world_point) override;

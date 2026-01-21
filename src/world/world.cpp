@@ -4,7 +4,7 @@
 
 namespace ray_tracer::world {
 
-using geometry::intersect;
+//using geometry::intersect;
 using geometry::Intersection;
 using geometry::Sphere;
 using helpers::Computation;
@@ -47,10 +47,11 @@ std::vector<Intersection> intersect_world(const World &world, const Ray &ray) {
     std::vector<Intersection> xs;
     if (world.objects.size() == 0) return {};
     for (const auto *object : world.objects) {
-        auto inters = intersect(object, ray);
-        for (auto inter : inters) {
-            xs.push_back(inter);
-        }
+        object->intersect(ray, xs);
+        // auto inters = intersect(object, ray);
+        // for (auto inter : inters) {
+        //     xs.push_back(inter);
+        // }
     }
     std::sort(xs.begin(), xs.end(),
               [](const Intersection &i1, const Intersection &i2) { return i1.t < i2.t; });

@@ -16,13 +16,13 @@ struct Matrix {
     Matrix(std::size_t r, std::size_t c, std::initializer_list<double> values);
     Matrix(std::size_t r, std::size_t c);
     
-    static Matrix identity(std::size_t n);
     const double& operator()(std::size_t r, std::size_t c) const { return data[(r * cols + c)]; }
     void operator()(std::size_t r, std::size_t c, double val) { data[(r * cols + c)] = val; }
     Matrix transpose() const;
     Matrix submatrix(std::size_t r, std::size_t c) const;
 };
 
+Matrix identity(std::size_t n);
 bool operator==(const Matrix &a, const Matrix &b);
 Matrix operator*(const Matrix &a, const Matrix &b);
 Tuple operator*(const Matrix &m, const Tuple &t);
@@ -30,6 +30,7 @@ double minor(const Matrix &m, std::size_t r, std::size_t c);
 double cofactor(const Matrix &m, std::size_t r, std::size_t c);
 double determinant(const Matrix &m);
 Matrix inverse(const Matrix &m); 
+Matrix inverse_gauss_jordan(const Matrix &m);
 void print_matrix(const Matrix &m);
 
 };  // namespace ray_tracer::math

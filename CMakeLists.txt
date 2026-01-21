@@ -43,6 +43,8 @@ message(STATUS "compiling without emscripten")
 
 add_executable(sphere_on_plane apps/sphere_on_plane.cpp)
 target_link_libraries(sphere_on_plane PRIVATE ray_tracer)
+add_executable(anim_test apps/anim_test.cpp)
+target_link_libraries(anim_test PRIVATE ray_tracer)
 
 
 include(FetchContent)

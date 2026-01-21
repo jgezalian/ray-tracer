@@ -19,21 +19,21 @@ void Pattern::add_colors(std::initializer_list<Color> color_list) {
 }
 
 Color Stripe_Pattern::pattern_at_object(const geometry::Shape* object, const math::Tuple& world_point) {
-    Matrix pattern_transform = chain_transform({inverse(object->transform), inverse(transform)});
+    Matrix pattern_transform = chain_transform({object->get_inverse_transform(), get_inverse_transform()});
     Tuple pattern_point = pattern_transform * world_point;
     int int_pattern_point = static_cast<int>(std::abs(std::floor(pattern_point.x)));
     return colors[static_cast<std::size_t>(int_pattern_point) % colors.size()];
 }
 
 Color Gradient_Pattern::pattern_at_object(const Shape* object, const Tuple& world_point) {
-    Matrix pattern_transform = chain_transform({inverse(object->transform), inverse(transform)});
+    Matrix pattern_transform = chain_transform({object->get_inverse_transform(), get_inverse_transform()});
     Tuple pattern_point = pattern_transform * world_point;
     double c = (pattern_point.x - std::floor(pattern_point.x));
     return colors[0] + ((colors[1] - colors[0]) * c);
 }
 
 Color Checkered_Pattern::pattern_at_object(const Shape* object, const Tuple& world_point) {
-    Matrix pattern_transform = chain_transform({inverse(object->transform), inverse(transform)});
+    Matrix pattern_transform = chain_transform({object->get_inverse_transform(), get_inverse_transform()});
     Tuple pattern_point = pattern_transform * world_point;
     int sum = static_cast<int>((std::floor(pattern_point.x)) + (std::floor(pattern_point.z)));
     if (sum % 2 == 0) {

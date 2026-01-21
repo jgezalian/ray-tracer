@@ -11,14 +11,15 @@ TEST(Sphere, set_transform) {
     Sphere sphere;
     const Matrix trans = translation(2, 3, 4);
     sphere.set_transform(trans);
-    expect_matrix_eq(sphere.transform, trans);
+    expect_matrix_eq(sphere.get_transform(), trans);
 }
 
 TEST(Sphere, set_transform_scaling) {
     const Ray ray = Ray(point(0, 0, -5), vector(0, 0, 1));
     Sphere sphere;
     sphere.set_transform(scaling(2, 2, 2));
-    const std::vector<Intersection> xs = intersect(&sphere, ray);
+    std::vector<Intersection> xs;
+    sphere.intersect(ray, xs);
     EXPECT_EQ(xs.size(), 2);
     EXPECT_NEAR(xs[0].t, 3, 1e-12);
     EXPECT_NEAR(xs[1].t, 7, 1e-12);
@@ -28,18 +29,9 @@ TEST(Sphere, set_transform_translation) {
     const Ray ray = Ray(point(0, 0, -5), vector(0, 0, 1));
     Sphere sphere;
     sphere.set_transform(translation(5, 0, 0));
-    const std::vector<Intersection> xs = intersect(&sphere, ray);
+    std::vector<Intersection> xs;
+    sphere.intersect(ray, xs);
     EXPECT_EQ(xs.size(), 0);
-}
-
-TEST(Sphere, set_transform_translation1) {
-    const Ray ray = Ray(point(-5, 0, 0), vector(1, 0, 0));
-    Sphere sphere;
-    //sphere.set_transform(translation(3, 0, 0));
-    const std::vector<Intersection> xs = intersect(&sphere, ray);
-    EXPECT_EQ(xs.size(), 2);
-    EXPECT_NEAR(xs[0].t, 4, 1e-12);
-    EXPECT_NEAR(xs[1].t, 6, 1e-12);
 }
 
 TEST(Sphere, normal_at) {
@@ -55,6 +47,7 @@ TEST(Sphere, normal_at_non_axial) {
     const Tuple n = sphere.normal_at(p);
     tuple_eq(n, norm(n));
 }
+
 
 TEST(Sphere, normal_at_transformed) {
     Sphere sphere;

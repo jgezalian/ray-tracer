@@ -7,7 +7,8 @@ namespace ray_tracer::geometry {
 struct Plane : public Shape{
     Plane() : Shape() {}
     math::Tuple normal_at(const math::Tuple &world_point) const override;
-    std::vector<Intersection> local_intersect(const math::Ray &ray) const override;
+    void local_intersect(const math::Ray &ray, std::vector<Intersection>& world_intersections) const override;
+    
 };
 
 
