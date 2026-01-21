@@ -79,11 +79,19 @@ extern "C" void EMSCRIPTEN_KEEPALIVE sphere_on_plane_render_pixels(unsigned char
 
     // floor
     Plane* floor = new Plane();
-    floor->transform = translation(0, -5, 0);
+    floor->set_transform(translation(0, -5, 0));
     Checkered_Pattern* cp = new Checkered_Pattern;
     cp->set_transform(scaling(4, 1, 4));  // bigger checkers on the plane
     floor->material.pattern = cp;
     world.objects.push_back(floor);
+
+    // wall
+    // Plane* floor = new Plane();
+    // floor->set_transform(chain_transform({rotate_x(pi / 2), translation(0, 0, 0)}));
+    // Checkered_Pattern* cp = new Checkered_Pattern;
+    // cp->set_transform(scaling(4, 1, 4));  // bigger checkers on the plane
+    // floor->material.pattern = cp;
+    // world.objects.push_back(floor);
 
     // center sphere
     Sphere* center_sphere = new Sphere();
