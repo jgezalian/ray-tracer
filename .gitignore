@@ -8,6 +8,7 @@ compile_commands.json
 /_deps/
 /.VSCodeCounter/
 /bin/
+/build_*/
 
 # Binaries
 *.o
