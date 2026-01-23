@@ -26,11 +26,11 @@ class Shape {
         static inline std::size_t next_id = 0;
         lighting::Material material;
         virtual math::Tuple normal_at(const math::Tuple &world_point) const = 0;
-        void set_transform(const math::Matrix &mat) { transform = mat; inverse_transform = math::inverse(mat); }
+        void set_transform(const math::Matrix &mat) { transform = mat; inverse_transform = math::inverse_gauss_jordan(mat); }
 
     private:
         math::Matrix transform = math::identity(4);
-        math::Matrix inverse_transform = math::inverse(transform);
+        math::Matrix inverse_transform = math::inverse_gauss_jordan(transform);
 };
 
 }  // namespace ray_tracer::geometry

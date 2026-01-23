@@ -74,10 +74,10 @@ TEST(Matrix, cofactor) {
 TEST(Matrix, inverse) {
     std::vector<double> vals{1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0};
     const Matrix m(4, 4, {-5, 2, 6, -8, 1, -5, 1, 8, 7, 7, -6, -7, 1, -3, 7, 4});
-    const Matrix m_inv = inverse(m);
+    const Matrix m_inv = inverse_gauss_jordan(m);
     expect_matrix(m * m_inv, vals);
     const Matrix m2(4, 4, {8, -5, 9, 2, 7, 5, 6, 1, -6, 0, 9, 6, -3, 0, -9, -4});
-    const Matrix m2_inv = inverse(m2);
+    const Matrix m2_inv = inverse_gauss_jordan(m2);
     expect_matrix(m2 * m2_inv, vals);
 }
 

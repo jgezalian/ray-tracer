@@ -34,7 +34,7 @@ struct Camera {
 
         void set_transform(const math::Matrix &trans_) {
             trans = trans_;
-            inverse_trans = math::inverse(trans_);
+            inverse_trans = math::inverse_gauss_jordan(trans_);
         }
 
         const math::Matrix& get_transform() const {
@@ -47,7 +47,7 @@ struct Camera {
 
         private:
             math::Matrix trans = math::identity(4);
-            math::Matrix inverse_trans = math::inverse(trans);
+            math::Matrix inverse_trans = math::inverse_gauss_jordan(trans);
 
 
 };

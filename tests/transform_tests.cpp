@@ -21,7 +21,7 @@ TEST(Transform, translate_point) {
 
 TEST(Transform, translate_point_inv) {
     const Matrix trans = translation(5, -3, 2);
-    const Matrix trans_inv = inverse(trans);
+    const Matrix trans_inv = inverse_gauss_jordan(trans);
     const Tuple p = point(-3, 4, 5);
     const Matrix p_col_mat = Matrix(4, 1, {p.x, p.y, p.z, p.w});
     const Matrix p_trans_mat = trans_inv * p_col_mat;
@@ -62,7 +62,7 @@ TEST(Transform, scale_vec) {
 
 TEST(Transform, scale_vec_inv) {
     const Matrix scale = scaling(2, 3, 4);
-    const Matrix scale_inv = inverse(scale);
+    const Matrix scale_inv = inverse_gauss_jordan(scale);
     const Tuple v = vector(-4, 6, 8);
     const Matrix v_col_mat = tuple_to_mat(v);
     const Matrix v_trans_mat = scale_inv * v_col_mat;
@@ -92,7 +92,7 @@ TEST(Transform, rotate_x) {
 TEST(Transform, rotate_inv_x) {
     const Tuple p = point(0, 1, 0);
     const Matrix half_quarter = rotate_x(pi / 4);
-    const Matrix inv_half_quarter = inverse(half_quarter);
+    const Matrix inv_half_quarter = inverse_gauss_jordan(half_quarter);
     expect_tuple(inv_half_quarter * p, 0, std::sqrt(2) / 2, -1 * std::sqrt(2) / 2, 1);
 }
 

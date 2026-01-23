@@ -11,7 +11,7 @@ namespace ray_tracer::camera {
 
 using img::Canvas;
 using img::Color;
-using math::inverse;
+using math::inverse_gauss_jordan;
 using math::norm;
 using math::point;
 using math::print_tuple;

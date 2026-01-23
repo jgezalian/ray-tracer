@@ -5,7 +5,7 @@
 
 namespace ray_tracer::geometry {
 
-using math::inverse;
+using math::inverse_gauss_jordan;
 using math::point;
 using math::print_matrix;
 using math::Ray;

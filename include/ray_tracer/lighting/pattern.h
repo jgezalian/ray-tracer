@@ -17,7 +17,7 @@ class Pattern {
         Pattern() :
             colors{img::Color(0, 0, 0), img::Color(1, 1, 1)},
             transform(math::identity(4)),
-            inverse_transform(math::inverse(transform)) {}
+            inverse_transform(math::inverse_gauss_jordan(transform)) {}
         Pattern(std::initializer_list<img::Color> _colors) :
             colors(_colors), transform(math::identity(4)) {}
 
@@ -32,12 +32,12 @@ class Pattern {
         math::Matrix get_inverse_transform() { return inverse_transform; };
         void set_transform(const math::Matrix& mat) {
             transform = mat;
-            inverse_transform = math::inverse(mat);
+            inverse_transform = math::inverse_gauss_jordan(mat);
         }
 
     private:
         math::Matrix transform = math::identity(4);
-        math::Matrix inverse_transform = math::inverse(transform);
+        math::Matrix inverse_transform = math::inverse_gauss_jordan(transform);
 };
 
 struct Stripe_Pattern : public Pattern {

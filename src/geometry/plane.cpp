@@ -3,7 +3,7 @@
 namespace ray_tracer::geometry {
 
 using lighting::Material;
-using math::inverse;
+using math::inverse_gauss_jordan;
 using math::norm;
 using math::point;
 using math::Tuple;

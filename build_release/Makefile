@@ -218,6 +218,19 @@ anim_test/fast:
 .PHONY : anim_test/fast
 
 #=============================================================================
+# Target rules for targets named misc
+
+# Build rule for target.
+misc: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 misc
+.PHONY : misc
+
+# fast build rule for target.
+misc/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/misc.dir/build.make CMakeFiles/misc.dir/build
+.PHONY : misc/fast
+
+#=============================================================================
 # Target rules for targets named unit_tests
 
 # Build rule for target.
@@ -318,6 +331,30 @@ apps/anim_test.s: apps/anim_test.cpp.s
 apps/anim_test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/anim_test.dir/build.make CMakeFiles/anim_test.dir/apps/anim_test.cpp.s
 .PHONY : apps/anim_test.cpp.s
+
+apps/misc.o: apps/misc.cpp.o
+.PHONY : apps/misc.o
+
+# target to build an object file
+apps/misc.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/misc.dir/build.make CMakeFiles/misc.dir/apps/misc.cpp.o
+.PHONY : apps/misc.cpp.o
+
+apps/misc.i: apps/misc.cpp.i
+.PHONY : apps/misc.i
+
+# target to preprocess a source file
+apps/misc.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/misc.dir/build.make CMakeFiles/misc.dir/apps/misc.cpp.i
+.PHONY : apps/misc.cpp.i
+
+apps/misc.s: apps/misc.cpp.s
+.PHONY : apps/misc.s
+
+# target to generate assembly for a file
+apps/misc.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/misc.dir/build.make CMakeFiles/misc.dir/apps/misc.cpp.s
+.PHONY : apps/misc.cpp.s
 
 apps/sphere_on_plane.o: apps/sphere_on_plane.cpp.o
 .PHONY : apps/sphere_on_plane.o
@@ -1010,6 +1047,7 @@ help:
 	@echo "... gmock_main"
 	@echo "... gtest"
 	@echo "... gtest_main"
+	@echo "... misc"
 	@echo "... misc_tests"
 	@echo "... ray_tracer"
 	@echo "... sphere_on_plane"
@@ -1017,6 +1055,9 @@ help:
 	@echo "... apps/anim_test.o"
 	@echo "... apps/anim_test.i"
 	@echo "... apps/anim_test.s"
+	@echo "... apps/misc.o"
+	@echo "... apps/misc.i"
+	@echo "... apps/misc.s"
 	@echo "... apps/sphere_on_plane.o"
 	@echo "... apps/sphere_on_plane.i"
 	@echo "... apps/sphere_on_plane.s"
