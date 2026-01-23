@@ -1,5 +1,6 @@
 #pragma once
 #include <gtest/gtest.h>
+#include <gmock/gmock.h> 
 #include <ray_tracer/camera/camera.h>
 #include <ray_tracer/geometry/intersection.h>
 #include <ray_tracer/geometry/plane.h>

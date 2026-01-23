@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+
 #include "test_helpers.h"
 
 using namespace ray_tracer::math;
@@ -46,8 +47,8 @@ TEST(Matrix, determinant) {
     EXPECT_NEAR(determinant(m1), -4071, 1e-12);
     const Matrix m2(4, 4, {-5, 2, 6, -8, 1, -5, 1, 8, 7, 7, -6, -7, 1, -3, 7, 4});
     EXPECT_NEAR(determinant(m2), 532, 1e-12);
-    //const Matrix m3(4, 4, {1, 0, 0, 0, 0, 0.707107, -0.707107, 0, 0, 0.707107, 0.707107, 0, 0, 0, 0, 1});
-    //EXPECT_NEAR(determinant(m3), 1, 1e-12);
+    // const Matrix m3(4, 4, {1, 0, 0, 0, 0, 0.707107, -0.707107, 0, 0, 0.707107, 0.707107, 0, 0, 0, 0, 1});
+    // EXPECT_NEAR(determinant(m3), 1, 1e-12);
 }
 
 TEST(Matrix, submatrix) {
@@ -71,8 +72,7 @@ TEST(Matrix, cofactor) {
 }
 
 TEST(Matrix, inverse) {
-    std::vector<double> vals{1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0,
-                             0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0};
+    std::vector<double> vals{1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0};
     const Matrix m(4, 4, {-5, 2, 6, -8, 1, -5, 1, 8, 7, 7, -6, -7, 1, -3, 7, 4});
     const Matrix m_inv = inverse(m);
     expect_matrix(m * m_inv, vals);
@@ -81,3 +81,68 @@ TEST(Matrix, inverse) {
     expect_matrix(m2 * m2_inv, vals);
 }
 
+TEST(Matrix, matrix_max) {
+    Matrix m(2, 2, {1, 2, 3, 4});
+    dbl_eql(m.max(), 4);
+    Matrix m2(3, 3, {1.0, 2.0, 3.0, 123.56, -10, 1, 2, 3, 4});
+    dbl_eql(m2.max(), 123.56);
+}
+
+TEST(Matrix, check_pivot) {
+    Matrix m(2, 2, {0, 1, 0, 1});
+    EXPECT_EQ(check_pivot(m, 0, 1e-12), 0);
+    Matrix m2(3, 3, {1, 0, 2, 3, 0, 4, 5, 0, 6});
+    EXPECT_EQ(check_pivot(m2, 2, 1e-12), 1);
+}
+
+TEST(Matrix, normalize_row) {
+    Matrix m(2, 2, {2, 1, 10, 100});
+    normalize_row(m, 0);
+    EXPECT_NEAR(m(0, 0), 1, 1e-9);
+    EXPECT_NEAR(m(0, 1), 0, 5);
+}
+
+TEST(Matrix, inverse_gauss_jordan_not_invertible) {
+    Matrix m(2, 2, {1, 1, 1, 1});
+    EXPECT_THROW(inverse_gauss_jordan(m), std::runtime_error);
+}
+
+TEST(Matrix, inverse_gauss_jordan_identity) {
+    Matrix m(3, 3, {1, 0, 0, 0, 1, 0, 0, 0, 1});
+    const Matrix m_inv_ref(3, 3, {1, 0, 0, 0, 1, 0, 0, 0, 1});
+    expect_matrix_eq(inverse_gauss_jordan(m), m_inv_ref);
+}
+
+TEST(Matrix, inverse_gauss_jordan_diagonal_mixed_4x4) {
+    Matrix m(4, 4, {2, 0, 0, 0, 0, -3, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 10});
+    const Matrix m_inv_ref(4, 4, {0.5, 0, 0, 0, 0, -0.3333333333333333, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0.1});
+    expect_matrix_eq(inverse_gauss_jordan(m), m_inv_ref);
+}
+
+TEST(Matrix, inverse_gauss_jordan_permutation_3x3_self_inverse) {
+    Matrix m(3, 3, {0, 0, 1, 0, 1, 0, 1, 0, 0});
+    const Matrix m_inv_ref(3, 3, {0, 0, 1, 0, 1, 0, 1, 0, 0});
+    expect_matrix_eq(inverse_gauss_jordan(m), m_inv_ref);
+}
+
+TEST(Matrix, inverse_gauss_jordan_negative_dominated_scale_2x2) {
+    Matrix m(2, 2, {-1000, 0, 0, 1});
+    const Matrix m_inv_ref(2, 2, {-0.001, 0, 0, 1});
+    expect_matrix_eq(inverse_gauss_jordan(m), m_inv_ref);
+}
+
+TEST(Matrix, inverse_gauss_jordan_singular_duplicate_rows_throws) {
+    Matrix m(3, 3, {1, 2, 3, 1, 2, 3, 4, 5, 6});
+    EXPECT_THROW(inverse_gauss_jordan(m), std::runtime_error);
+}
+
+TEST(Matrix, inverse_gauss_jordan_nonsquare_throws) {
+    Matrix m(2, 3, {1, 2, 3, 4, 5, 6});
+    EXPECT_THROW(inverse_gauss_jordan(m), std::runtime_error);
+}
+
+TEST(Matrix, inverse_gauss_jordan) {
+    Matrix m(3, 3, {2, -1, 0, -1, 2, -1, 0, -1, 2});
+    const Matrix m_inv_ref(3, 3, {.75, .5, .25, .5, 1, .5, .25, .5, .75});
+    expect_matrix_eq(inverse_gauss_jordan(m), m_inv_ref);
+}

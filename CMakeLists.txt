@@ -45,6 +45,8 @@ add_executable(sphere_on_plane apps/sphere_on_plane.cpp)
 target_link_libraries(sphere_on_plane PRIVATE ray_tracer)
 add_executable(anim_test apps/anim_test.cpp)
 target_link_libraries(anim_test PRIVATE ray_tracer)
+add_executable(misc apps/misc.cpp)
+target_link_libraries(misc PRIVATE ray_tracer)
 
 
 include(FetchContent)
@@ -54,6 +56,7 @@ FetchContent_Declare(
     GIT_TAG v1.17.0)
 
 FetchContent_MakeAvailable(googletest)
+
 
 enable_testing()
 add_executable(unit_tests 
@@ -71,6 +74,7 @@ add_executable(unit_tests
     )
 target_include_directories(unit_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 target_link_libraries(unit_tests PRIVATE ray_tracer GTest::gtest_main)
+target_link_libraries(unit_tests PRIVATE ray_tracer GTest::gmock)
 
 
 include(GoogleTest)         # helper macros
@@ -80,6 +84,7 @@ add_executable(misc_tests
     tests/misc_tests.cpp)
 target_include_directories(misc_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 target_link_libraries(misc_tests PRIVATE ray_tracer GTest::gtest_main)
+target_link_libraries(misc_tests PRIVATE ray_tracer GTest::gmock)
 include(GoogleTest)         # helper macros
 gtest_discover_tests(misc_tests DISCOVERY_MODE PRE_TEST)  # auto-register tests with CTest
 

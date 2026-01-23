@@ -13,19 +13,19 @@ UseTab: Never
 ContinuationIndentWidth: 4
 
 # Line length
-ColumnLimit: 100
+ColumnLimit: 150
 
 # Access modifiers
 AccessModifierOffset: 0
 IndentAccessModifiers: true
 
 # Alignment
-AlignAfterOpenBracket: Align
+AlignAfterOpenBracket: DontAlign
 AlignConsecutiveAssignments: false
 AlignConsecutiveDeclarations: false
 AlignEscapedNewlines: Left
-AlignOperands: true
-AlignTrailingComments: true
+AlignOperands: false
+AlignTrailingComments: false
 
 # Allow parameters on next line
 AllowAllParametersOfDeclarationOnNextLine: true
@@ -42,7 +42,7 @@ AlwaysBreakBeforeMultilineStrings: true
 AlwaysBreakTemplateDeclarations: Yes
 
 # Binary operators
-BreakBeforeBinaryOperators: None
+BreakBeforeBinaryOperators: NonAssignment
 BreakBeforeBraces: Attach
 BreakBeforeInheritanceComma: false
 BreakInheritanceList: BeforeColon
@@ -51,8 +51,8 @@ BreakConstructorInitializersBeforeComma: false
 BreakStringLiterals: true
 
 # Bin packing
-BinPackArguments: true
-BinPackParameters: true
+BinPackArguments: false
+BinPackParameters: false
 
 # Comments
 CommentPragmas: '^ IWYU pragma:'

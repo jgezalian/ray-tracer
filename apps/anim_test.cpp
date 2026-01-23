@@ -58,10 +58,10 @@ void animate() {
     floor->material.pattern = cp;
     world.objects.push_back(floor);
 
-    Camera camera{1000, 1000, pi / 2};
-    camera.set_transform(view_transform(point(0, 7, -12), point(0, 0, 0), vector(0, 1, 0)));
+    Camera camera{500, 500, pi / 4};
+    camera.set_transform(view_transform(point(0, 7, -15), point(0, 0, 0), vector(0, 1, 0)));
 
-    int frames = 200;
+    int frames = 100;
     double distance = 20;
     for (int i = 0; i <= frames; ++i) {
         double delta = i * (distance / frames);
